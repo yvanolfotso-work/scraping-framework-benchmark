@@ -1,0 +1,378 @@
+# Compte rendu de benchmark — Comparaison des solutions de Web Scraping
+
+## 1. Objectif du benchmark
+
+[Classement des meilleurs outils de Web Scraping en Python](https://github.com/topics/web-scraping-python)
+
+L'objectif de ce test est de comparer plusieurs solutions modernes de Web Scraping afin d'identifier l'approche la plus adaptée selon le type de site rencontré.
+
+Les solutions étudiées sont :
+
+- **Scrapy** : framework historique orienté crawling et extraction massive.
+- **Botasaurus** : framework orienté navigateur automatisé avec capacités anti-détection.
+- **Scrapling** : framework récent combinant scraping classique, navigateur dynamique et extraction adaptative.
+
+Le site utilisé pour les tests est :
+
+```
+https://retail-pap.vercel.app/
+```
+
+Il s'agit d'un site e-commerce moderne dont les produits sont générés côté navigateur avec JavaScript.
+
+Les informations recherchées :
+
+- nom produit
+- prix
+- description
+- image
+- badge promotionnel
+
+---
+
+## 2. Installation et prérequis
+
+Avant d'exécuter les tests, il faut créer un environnement virtuel Python et installer les dépendances.
+
+### 2.1 Créer l'environnement virtuel
+
+```bash
+python -m venv venv
+```
+
+### 2.2 Activer l'environnement virtuel
+
+Sur Windows (PowerShell) :
+
+```bash
+venv\Scripts\Activate.ps1
+```
+
+Sur macOS / Linux :
+
+```bash
+source venv/bin/activate
+```
+
+### 2.3 Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
+
+Le fichier `requirements.txt` a été généré avec la commande suivante et regroupe toutes les dépendances nécessaires aux trois frameworks testés (Scrapy, Botasaurus, Scrapling) :
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## 3. Présentation des solutions testées
+
+### 3.1 Scrapy
+
+#### Description
+
+Scrapy est un framework Python mature spécialisé dans :
+
+- crawling massif
+- exploration de plusieurs pages
+- extraction structurée
+- pipelines de données
+
+Architecture :
+
+```
+Spider
+ |
+ v
+Requête HTTP
+ |
+ v
+HTML serveur
+ |
+ v
+Extraction XPath/CSS
+ |
+ v
+Pipeline
+```
+
+#### Avantages
+
+- Très rapide
+- Faible consommation mémoire
+- Excellent pour les gros volumes
+- Très utilisé en production
+
+#### Limites
+
+- N'exécute pas JavaScript par défaut
+- Difficulté avec les applications React/Vue/Next.js
+- Nécessite Selenium/Playwright pour les pages dynamiques
+
+#### Exécution du test
+
+```bash
+cd scraper_project/scraper_project
+scrapy crawl retail -o retail_result.json
+```
+
+---
+
+### 3.2 Botasaurus
+
+#### Description
+
+Botasaurus est un framework orienté navigateur réel. Il utilise :
+
+- Chromium
+- automatisation navigateur
+- gestion des sessions
+- mécanismes anti-détection
+
+Architecture :
+
+```
+Navigateur Chromium
+        |
+        v
+JavaScript exécuté
+        |
+        v
+Page complète
+        |
+        v
+Extraction
+```
+
+#### Résultat du test
+
+Sur le site `https://retail-pap.vercel.app/` :
+
+- Page chargée
+- Produits détectés
+- 24 produits extraits
+- Images récupérées
+- Prix récupérés
+
+Exemple :
+
+```json
+{
+  "name": "Bleu marine Costume deux-pièces en laine",
+  "price": "749 €",
+  "description": "Laine Super 110s Tailored Fit",
+  "image": "...jpg"
+}
+```
+
+#### Avantages
+
+- Très efficace sur les sites modernes
+- Gestion JavaScript native
+- Bon comportement face aux protections
+- Extraction proche d'un utilisateur réel
+
+#### Limites
+
+- Plus lourd qu'un scraper HTTP classique
+- Consomme plus de ressources
+
+#### Exécution du test
+
+```bash
+cd botasaurus_test
+python botasaurus_product_scraper.py
+```
+
+---
+
+### 3.3 Scrapling
+
+#### Description
+
+Scrapling est un framework récent proposant plusieurs niveaux de scraping :
+
+- scraping HTTP classique
+- navigateur dynamique
+- navigateur furtif
+
+Il permet d'adapter la stratégie selon la difficulté du site.
+
+Architecture générale :
+
+```
+Scrapling
+    |
+    +-- Fetcher
+    |
+    +-- DynamicFetcher
+    |
+    +-- StealthyFetcher
+```
+
+---
+
+## 4. Tests détaillés Scrapling
+
+### 4.1 Scrapling Fetcher
+
+#### Résultat
+
+```
+Page récupérée
+Titre trouvé
+Produits non détectés
+```
+
+Cause : les produits sont injectés après exécution JavaScript.
+
+Conclusion : non adapté pour ce site.
+
+#### Exécution du test
+
+```bash
+cd scrapling_test
+python scrapling_test.py
+```
+
+---
+
+### 4.2 Scrapling DynamicFetcher
+
+#### Fonctionnement
+
+Utilisation d'un navigateur Chromium.
+
+#### Résultat
+
+```
+Nombre produits trouvés : 24
+```
+
+Données extraites :
+
+- Nom
+- Prix
+- Image
+- Description
+
+Conclusion : excellent compromis pour les sites modernes.
+
+---
+
+### 4.3 Scrapling StealthyFetcher
+
+#### Fonctionnement
+
+Même principe que DynamicFetcher mais avec une couche furtive.
+
+#### Résultat
+
+```
+Nombre produits trouvés : 24
+```
+
+Données extraites :
+
+- Nom
+- Prix
+- Image
+- Description
+
+Conclusion : plus adapté aux sites protégés.
+
+#### Exécution du test
+
+```bash
+cd scrapling_browser_test
+python scrapling_browser_product.py
+```
+
+---
+
+## 5. Tableau comparatif global
+
+| Critère                     | Scrapy       | Botasaurus             | Scrapling                   |
+|------------------------------|--------------|-------------------------|-------------------------------|
+| Type                         | HTTP crawler | Navigateur automatisé   | Framework hybride             |
+| JavaScript                   | Non natif    | Oui                      | Oui, avec Dynamic/Stealth     |
+| Rapidité                     | ⭐⭐⭐⭐⭐        | ⭐⭐⭐                     | ⭐⭐⭐⭐                          |
+| Consommation ressources      | Faible       | Élevée                   | Moyenne                       |
+| Sites React/Vue/Next         | Limité       | Excellent                | Excellent                     |
+| Anti-bot                     | Faible       | Très bon                 | Très bon avec Stealthy        |
+| Crawling massif               | Excellent    | Moyen                    | Bon                            |
+| Facilité extraction produit  | Moyenne      | Excellente               | Excellente                    |
+| Production e-commerce        | Très bon     | Très bon                 | Très bon                      |
+
+---
+
+## 6. Résultats du benchmark sur le site testé
+
+| Solution                  | Résultat                                              |
+|----------------------------|--------------------------------------------------------|
+| Scrapy                     | HTML récupéré mais nécessite rendu JS supplémentaire  |
+| Botasaurus                 | 24 produits extraits avec succès                       |
+| Scrapling Fetcher          | Page récupérée mais produits absents                   |
+| Scrapling DynamicFetcher   | 24 produits extraits avec succès                       |
+| Scrapling StealthyFetcher  | 24 produits extraits avec succès                       |
+
+---
+
+## 7. Conclusion générale
+
+Les tests montrent qu'il n'existe pas un outil universel : le choix dépend du type de site.
+
+### Sites simples et gros volumes
+
+→ **Scrapy**
+
+Meilleur choix pour :
+
+- crawling massif
+- catalogues importants
+- extraction rapide
+
+### Sites modernes avec JavaScript
+
+→ **Botasaurus ou Scrapling DynamicFetcher**
+
+Meilleur choix pour :
+
+- e-commerce
+- React
+- Next.js
+- pages dynamiques
+
+### Sites protégés
+
+→ **Scrapling StealthyFetcher ou Botasaurus**
+
+Meilleur choix pour :
+
+- Cloudflare
+- anti-bot
+- fingerprint navigateur
+
+### Conclusion du test réalisé
+
+Sur le site `retail-pap.vercel.app` :
+
+- Scrapy nécessite une couche navigateur supplémentaire.
+- Botasaurus récupère directement les produits avec succès.
+- Scrapling DynamicFetcher récupère également les produits avec une approche plus légère.
+- Scrapling StealthyFetcher apporte une couche supplémentaire pour les sites protégés.
+
+Le meilleur compromis observé pour un projet e-commerce moderne est :
+
+**Scrapling DynamicFetcher / Botasaurus selon le niveau de protection du site.**
+
+
+## Aperçu des résultats
+
+<p align="center">
+  <img src="./captures/1.png" width="45%" alt="Résultat 1" />
+  <img src="./captures/2.png" width="45%" alt="Résultat 2" />
+</p>
