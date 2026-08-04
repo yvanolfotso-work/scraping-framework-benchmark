@@ -1,0 +1,34 @@
+2026-08-04 12:56:18,192 [INFO] Ouverture navigateur : https://retail-pap.vercel.app/
+2026-08-04 12:56:36,208 [INFO] Fetched (200) <GET https://retail-pap.vercel.app/> (referer: https://www.google.com/)
+2026-08-04 12:56:39,400 [INFO] Nombre articles trouvés (bruts) : 24
+2026-08-04 12:56:39,407 [INFO] Produits valides extraits : 24
+2026-08-04 12:56:39,409 [INFO] [NOUVEAU]   Bleu marine Costume deux-pièces en laine
+2026-08-04 12:56:39,409 [INFO] [NOUVEAU]   Gris clair Costume deux-pièces en laine froide
+2026-08-04 12:56:39,409 [INFO] [NOUVEAU]   Beige sable Costume deux-pièces en lin
+2026-08-04 12:56:39,409 [INFO] [NOUVEAU]   Vert olive Costume deux-pièces en lin
+2026-08-04 12:56:39,409 [INFO] [NOUVEAU]   Gris anthracite Costume deux-pièces en flanelle
+2026-08-04 12:56:39,412 [INFO] [NOUVEAU]   Gris et brun Costume Prince-de-Galles
+2026-08-04 12:56:39,412 [INFO] [NOUVEAU]   Noir Smoking à revers satin
+2026-08-04 12:56:39,412 [INFO] [NOUVEAU]   Bleu nuit Costume en velours
+2026-08-04 12:56:39,412 [INFO] [NOUVEAU]   Bleu ciel Veste en lin
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Bleu marine Blazer en laine
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Rose poudré Veste en lin
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Brun chiné Veste en tweed
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Vert forêt Veste en velours
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Gris anthracite Pantalon en flanelle
+2026-08-04 12:56:39,413 [INFO] [NOUVEAU]   Beige Chino en coton
+2026-08-04 12:56:39,414 [INFO] [NOUVEAU]   Écru Pantalon en lin
+2026-08-04 12:56:39,414 [INFO] [NOUVEAU]   Bleu marine Pantalon à pinces en laine
+2026-08-04 12:56:39,414 [INFO] [NOUVEAU]   Brun tabac Pantalon en velours côtelé
+2026-08-04 12:56:39,414 [INFO] [NOUVEAU]   Blanc Chemise en popeline
+2026-08-04 12:56:39,415 [INFO] [NOUVEAU]   Bleu ciel Chemise en popeline
+2026-08-04 12:56:39,415 [INFO] [NOUVEAU]   Blanc Chemise Oxford col boutonné
+2026-08-04 12:56:39,415 [INFO] [NOUVEAU]   Blanc Chemise en lin
+2026-08-04 12:56:39,415 [INFO] [NOUVEAU]   Bleu denim Chemise en lin
+2026-08-04 12:56:39,415 [INFO] [NOUVEAU]   Blanc Chemise de smoking à plastron
+2026-08-04 12:56:39,418 [INFO] ===== RÉSUMÉ =====
+2026-08-04 12:56:39,418 [INFO] Total catalogue : 24
+2026-08-04 12:56:39,418 [INFO] Actifs          : 24
+2026-08-04 12:56:39,418 [INFO] Orphelins       : 0
+2026-08-04 12:56:39,418 [INFO] Modifiés (ce run) : 0
+2026-08-04 12:56:39,418 [INFO] Fichier          : catalogue.json

@@ -1,0 +1,482 @@
+{
+  "da88f066f6b88120": {
+    "id": "da88f066f6b88120",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "b3b9239718f34aa0c18545e23ce4120908cc8cd33ee559ba635084e2445cad2f",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu marine Costume deux-pièces en laine",
+      "price_raw": "749 €",
+      "price_value": 749.0,
+      "currency": "EUR",
+      "description": "Laine Super 110s Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-laine-marine.jpg",
+      "badge": null,
+      "searchable_text": "Bleu marine Costume deux-pièces en laine - Laine Super 110s Tailored Fit - 749 €"
+    },
+    "history": []
+  },
+  "7dac3347bcb94bdd": {
+    "id": "7dac3347bcb94bdd",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "59dc0f8fee43bf1266be5b85214b2b01e18e31dd5176dace55b049f74a359f4e",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Gris clair Costume deux-pièces en laine froide",
+      "price_raw": "749 €",
+      "price_value": 749.0,
+      "currency": "EUR",
+      "description": "Laine froide Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-laine-gris.jpg",
+      "badge": null,
+      "searchable_text": "Gris clair Costume deux-pièces en laine froide - Laine froide Slim Fit - 749 €"
+    },
+    "history": []
+  },
+  "5586c1d225595e48": {
+    "id": "5586c1d225595e48",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "32c10b74d5dea6859f47835c004199f4a9d83b89ad2faa7ba32289a64dcb3108",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Beige sable Costume deux-pièces en lin",
+      "price_raw": "454 €",
+      "price_value": 454.0,
+      "currency": "EUR",
+      "description": "Lin et coton Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-lin-beige.jpg",
+      "badge": "RÉDUCTION",
+      "searchable_text": "Beige sable Costume deux-pièces en lin - Lin et coton Tailored Fit - 454 € - RÉDUCTION"
+    },
+    "history": []
+  },
+  "ab141fb78344e540": {
+    "id": "ab141fb78344e540",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "7ebbd4b9c92c9dc71e1851baa6377ae7e8cbe20f482bc7ee2868110863eb8e91",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Vert olive Costume deux-pièces en lin",
+      "price_raw": "454 €",
+      "price_value": 454.0,
+      "currency": "EUR",
+      "description": "Lin et coton Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-lin-vert.jpg",
+      "badge": "RÉDUCTION",
+      "searchable_text": "Vert olive Costume deux-pièces en lin - Lin et coton Tailored Fit - 454 € - RÉDUCTION"
+    },
+    "history": []
+  },
+  "0f6f12599bb3ebde": {
+    "id": "0f6f12599bb3ebde",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "2de956d850b5e9633c85588dfb9adbb0b3ab159e6008ead8c17e0d1e7cdf1013",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Gris anthracite Costume deux-pièces en flanelle",
+      "price_raw": "829 €",
+      "price_value": 829.0,
+      "currency": "EUR",
+      "description": "Flanelle de laine Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-flanelle-anthracite.jpg",
+      "badge": null,
+      "searchable_text": "Gris anthracite Costume deux-pièces en flanelle - Flanelle de laine Tailored Fit - 829 €"
+    },
+    "history": []
+  },
+  "8ac1714d95c47bac": {
+    "id": "8ac1714d95c47bac",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "5b2fa8fe3cb9f1a2286e076c3e417256a427bb47c87033bc0ad673bd6cd54ac4",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Gris et brun Costume Prince-de-Galles",
+      "price_raw": "899 €",
+      "price_value": 899.0,
+      "currency": "EUR",
+      "description": "Laine à carreaux Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-carreaux-prince-de-galles.jpg",
+      "badge": null,
+      "searchable_text": "Gris et brun Costume Prince-de-Galles - Laine à carreaux Tailored Fit - 899 €"
+    },
+    "history": []
+  },
+  "123eb2f7088ac5b2": {
+    "id": "123eb2f7088ac5b2",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "e63d31966c079a0659242305a60be407d1dcd4d32ef38dc4458d5e9cc080a27d",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Noir Smoking à revers satin",
+      "price_raw": "1 090 €",
+      "price_value": 1090.0,
+      "currency": "EUR",
+      "description": "Laine et soie Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/smoking-noir.jpg",
+      "badge": null,
+      "searchable_text": "Noir Smoking à revers satin - Laine et soie Slim Fit - 1 090 €"
+    },
+    "history": []
+  },
+  "6e850449d71aad58": {
+    "id": "6e850449d71aad58",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "151e15f589ee844d09ae61bf9497d1e94661b65c997f13c22a369e4dec001840",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu nuit Costume en velours",
+      "price_raw": "949 €",
+      "price_value": 949.0,
+      "currency": "EUR",
+      "description": "Velours de coton Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/costume-velours-bleu-nuit.jpg",
+      "badge": "NOUVEAUTÉ",
+      "searchable_text": "Bleu nuit Costume en velours - Velours de coton Slim Fit - 949 € - NOUVEAUTÉ"
+    },
+    "history": []
+  },
+  "d053d04770b00fcc": {
+    "id": "d053d04770b00fcc",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "552d873e98420e748cd9730ec1f0c1d494213ab2c35a5a15b0c22c30cea417f9",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu ciel Veste en lin",
+      "price_raw": "379 €",
+      "price_value": 379.0,
+      "currency": "EUR",
+      "description": "Lin Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/veste-lin-bleu.jpg",
+      "badge": null,
+      "searchable_text": "Bleu ciel Veste en lin - Lin Tailored Fit - 379 €"
+    },
+    "history": []
+  },
+  "3d81a6b423a0a915": {
+    "id": "3d81a6b423a0a915",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "273e1f30e491dbedfce080cfe7a3567344bd20e5ffadc4099582a47df588cfb5",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu marine Blazer en laine",
+      "price_raw": "449 €",
+      "price_value": 449.0,
+      "currency": "EUR",
+      "description": "Laine Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/blazer-laine-marine.jpg",
+      "badge": null,
+      "searchable_text": "Bleu marine Blazer en laine - Laine Tailored Fit - 449 €"
+    },
+    "history": []
+  },
+  "ceff573d82d93611": {
+    "id": "ceff573d82d93611",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "d0f518283ce24320a3aa3c6751965ad2b3c6bc49903eba52f63a6539e41333e9",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Rose poudré Veste en lin",
+      "price_raw": "265 €",
+      "price_value": 265.0,
+      "currency": "EUR",
+      "description": "Lin Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/veste-lin-rose.jpg",
+      "badge": "RÉDUCTION",
+      "searchable_text": "Rose poudré Veste en lin - Lin Slim Fit - 265 € - RÉDUCTION"
+    },
+    "history": []
+  },
+  "50f6d4399f4deafa": {
+    "id": "50f6d4399f4deafa",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "3917e4d813aeacbd514bef848c31ae1b59b8736e9f18bd3814f530ebe1c73a95",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Brun chiné Veste en tweed",
+      "price_raw": "489 €",
+      "price_value": 489.0,
+      "currency": "EUR",
+      "description": "Tweed de laine Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/veste-tweed-brun.jpg",
+      "badge": "NOUVEAUTÉ",
+      "searchable_text": "Brun chiné Veste en tweed - Tweed de laine Regular Fit - 489 € - NOUVEAUTÉ"
+    },
+    "history": []
+  },
+  "f018030e05358a1a": {
+    "id": "f018030e05358a1a",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "314595227562d0ecceed5f4cf0c2993cf92eacaf0dbfb95439d9c55a0dc8e438",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Vert forêt Veste en velours",
+      "price_raw": "529 €",
+      "price_value": 529.0,
+      "currency": "EUR",
+      "description": "Velours de coton Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/veste-velours-vert.jpg",
+      "badge": null,
+      "searchable_text": "Vert forêt Veste en velours - Velours de coton Slim Fit - 529 €"
+    },
+    "history": []
+  },
+  "8b09d8cd75e2cb27": {
+    "id": "8b09d8cd75e2cb27",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "5238edb0b61141d88c7a3438cb768b1001e557bf728ff4b421195d6e741bb4fb",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Gris anthracite Pantalon en flanelle",
+      "price_raw": "189 €",
+      "price_value": 189.0,
+      "currency": "EUR",
+      "description": "Flanelle de laine Tailored Fit",
+      "image": "https://retail-pap.vercel.app/produits/pantalon-flanelle-gris.jpg",
+      "badge": null,
+      "searchable_text": "Gris anthracite Pantalon en flanelle - Flanelle de laine Tailored Fit - 189 €"
+    },
+    "history": []
+  },
+  "c3b19814fc05ef38": {
+    "id": "c3b19814fc05ef38",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "399716adff20dd3572336f2dd52389ab853bf2712f416d42f906ca6b2241acb8",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Beige Chino en coton",
+      "price_raw": "129 €",
+      "price_value": 129.0,
+      "currency": "EUR",
+      "description": "Coton stretch Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/chino-coton-beige.jpg",
+      "badge": null,
+      "searchable_text": "Beige Chino en coton - Coton stretch Slim Fit - 129 €"
+    },
+    "history": []
+  },
+  "f7e6fa8a907afc80": {
+    "id": "f7e6fa8a907afc80",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "186c588a90014c180a3369c603438460fe81702da42d898cb3e181f7fa5bef47",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Écru Pantalon en lin",
+      "price_raw": "159 €",
+      "price_value": 159.0,
+      "currency": "EUR",
+      "description": "Lin Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/pantalon-lin-ecru.jpg",
+      "badge": "NOUVEAUTÉ",
+      "searchable_text": "Écru Pantalon en lin - Lin Regular Fit - 159 € - NOUVEAUTÉ"
+    },
+    "history": []
+  },
+  "091eb6ecd7a19f29": {
+    "id": "091eb6ecd7a19f29",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "4d282dac70e485929890c10c3501c6693e9c13cc5c5012af40163ff76deec051",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu marine Pantalon à pinces en laine",
+      "price_raw": "199 €",
+      "price_value": 199.0,
+      "currency": "EUR",
+      "description": "Laine Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/pantalon-laine-marine.jpg",
+      "badge": null,
+      "searchable_text": "Bleu marine Pantalon à pinces en laine - Laine Regular Fit - 199 €"
+    },
+    "history": []
+  },
+  "a180f36218a5e7a6": {
+    "id": "a180f36218a5e7a6",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "451e14a421e9566f058fc734365b1a529a47b713ce0e115e862045e43a04cae7",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Brun tabac Pantalon en velours côtelé",
+      "price_raw": "143 €",
+      "price_value": 143.0,
+      "currency": "EUR",
+      "description": "Velours côtelé Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/pantalon-velours-cotele-brun.jpg",
+      "badge": "RÉDUCTION",
+      "searchable_text": "Brun tabac Pantalon en velours côtelé - Velours côtelé Slim Fit - 143 € - RÉDUCTION"
+    },
+    "history": []
+  },
+  "63628fc5540aeefb": {
+    "id": "63628fc5540aeefb",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "5b27860f4e2a665d489fb28e8222b1bebe3da0923f3cc1bca132632b05a0278f",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Blanc Chemise en popeline",
+      "price_raw": "99 €",
+      "price_value": 99.0,
+      "currency": "EUR",
+      "description": "Popeline de coton Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-popeline-blanche.jpg",
+      "badge": null,
+      "searchable_text": "Blanc Chemise en popeline - Popeline de coton Slim Fit - 99 €"
+    },
+    "history": []
+  },
+  "fa4fb6126aed03b1": {
+    "id": "fa4fb6126aed03b1",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "7194cf30823e8c8ca7ea1fd383cae1d36344725a6ac97d7e24b94d8a74c5cfa3",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu ciel Chemise en popeline",
+      "price_raw": "99 €",
+      "price_value": 99.0,
+      "currency": "EUR",
+      "description": "Popeline de coton Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-popeline-bleu-ciel.jpg",
+      "badge": null,
+      "searchable_text": "Bleu ciel Chemise en popeline - Popeline de coton Slim Fit - 99 €"
+    },
+    "history": []
+  },
+  "e2216b52abb7fa3a": {
+    "id": "e2216b52abb7fa3a",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "d7855c894d59dec147afee77a395952e4206a7ae367c36743093c49639ebb48b",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Blanc Chemise Oxford col boutonné",
+      "price_raw": "109 €",
+      "price_value": 109.0,
+      "currency": "EUR",
+      "description": "Coton Oxford Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-oxford-blanche.jpg",
+      "badge": null,
+      "searchable_text": "Blanc Chemise Oxford col boutonné - Coton Oxford Regular Fit - 109 €"
+    },
+    "history": []
+  },
+  "1f80d111b1e807de": {
+    "id": "1f80d111b1e807de",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "45aaba8479d25941def490cc01ea9b9c7b5e8e8f6069425146b6355f7c86d295",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Blanc Chemise en lin",
+      "price_raw": "119 €",
+      "price_value": 119.0,
+      "currency": "EUR",
+      "description": "Lin Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-lin-blanche.jpg",
+      "badge": "NOUVEAUTÉ",
+      "searchable_text": "Blanc Chemise en lin - Lin Regular Fit - 119 € - NOUVEAUTÉ"
+    },
+    "history": []
+  },
+  "29cbaa32e4876142": {
+    "id": "29cbaa32e4876142",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "1af1f194863c328cc32feb639405a588ccbd91d1e9ee41b7640ec6c27b628ef5",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Bleu denim Chemise en lin",
+      "price_raw": "95 €",
+      "price_value": 95.0,
+      "currency": "EUR",
+      "description": "Lin Regular Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-lin-bleu.jpg",
+      "badge": "RÉDUCTION",
+      "searchable_text": "Bleu denim Chemise en lin - Lin Regular Fit - 95 € - RÉDUCTION"
+    },
+    "history": []
+  },
+  "b6b2ad63684a942f": {
+    "id": "b6b2ad63684a942f",
+    "source_url": "https://retail-pap.vercel.app/",
+    "content_hash": "a7d73178905ace944c6e345d87cca3e0ed5c77966e027eee4287a772fa66acc0",
+    "first_seen": "2026-08-04T11:56:39.407884+00:00",
+    "last_checked": "2026-08-04T11:56:39.407884+00:00",
+    "last_changed": "2026-08-04T11:56:39.407884+00:00",
+    "status": "active",
+    "data": {
+      "name": "Blanc Chemise de smoking à plastron",
+      "price_raw": "149 €",
+      "price_value": 149.0,
+      "currency": "EUR",
+      "description": "Coton piqué Slim Fit",
+      "image": "https://retail-pap.vercel.app/produits/chemise-smoking-plastron.jpg",
+      "badge": null,
+      "searchable_text": "Blanc Chemise de smoking à plastron - Coton piqué Slim Fit - 149 €"
+    },
+    "history": []
+  }
+}
