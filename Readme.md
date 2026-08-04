@@ -293,6 +293,48 @@ python scrapling_browser_product.py
 
 ---
 
+### 4.4 Scrapling DynamicFetcher — version robuste (catalogue avec suivi)
+
+#### Fonctionnement
+
+Version consolidée du test DynamicFetcher, ajoutant un suivi du catalogue entre les exécutions :
+
+- détection des nouveaux produits
+- détection des produits orphelins (disparus du site)
+- détection des produits modifiés entre deux passages
+- journalisation complète dans un fichier de log
+- écriture du catalogue dans un fichier `catalogue.json`
+
+#### Résultat
+
+```
+Nombre articles trouvés (bruts) : 24
+Produits valides extraits : 24
+
+===== RÉSUMÉ =====
+Total catalogue : 24
+Actifs          : 24
+Orphelins       : 0
+Modifiés (ce run) : 0
+Fichier          : catalogue.json
+```
+
+Conclusion : version prête pour un usage répété (suivi de catalogue dans le temps), adaptée à une intégration dans un pipeline de veille produit.
+
+#### Exécution du test
+
+```bash
+cd Scrapling_DynamicFetcher
+python scrap_catalogue.py
+```
+
+Fichiers générés :
+
+- `catalogue.json` : catalogue consolidé des produits
+- `scraping.log` : journal détaillé de l'exécution
+
+---
+
 ## 5. Tableau comparatif global
 
 | Critère                     | Scrapy       | Botasaurus             | Scrapling                   |
@@ -368,9 +410,6 @@ Sur le site `retail-pap.vercel.app` :
 Le meilleur compromis observé pour un projet e-commerce moderne est :
 
 **Scrapling DynamicFetcher / Botasaurus selon le niveau de protection du site.**
-
-
-## Aperçu des résultats
 
 <p align="center">
   <img src="./captures/1.png" width="45%" alt="Résultat 1" />
