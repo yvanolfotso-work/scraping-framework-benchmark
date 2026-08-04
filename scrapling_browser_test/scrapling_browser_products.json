@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Bleu marine Costume deux-pièces en laine",
+        "price": "749 €",
+        "description": "Laine Super 110s Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris clair Costume deux-pièces en laine froide",
+        "price": "749 €",
+        "description": "Laine froide Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-laine-gris.jpg",
+        "badge": null
+    },
+    {
+        "name": "Beige sable Costume deux-pièces en lin",
+        "price": "454 €",
+        "description": "Lin et coton Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-lin-beige.jpg",
+        "badge": "RÉDUCTION"
+    },
+    {
+        "name": "Vert olive Costume deux-pièces en lin",
+        "price": "454 €",
+        "description": "Lin et coton Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-lin-vert.jpg",
+        "badge": "RÉDUCTION"
+    },
+    {
+        "name": "Gris anthracite Costume deux-pièces en flanelle",
+        "price": "829 €",
+        "description": "Flanelle de laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-flanelle-anthracite.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris et brun Costume Prince-de-Galles",
+        "price": "899 €",
+        "description": "Laine à carreaux Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-carreaux-prince-de-galles.jpg",
+        "badge": null
+    },
+    {
+        "name": "Noir Smoking à revers satin",
+        "price": "1 090 €",
+        "description": "Laine et soie Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/smoking-noir.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu nuit Costume en velours",
+        "price": "949 €",
+        "description": "Velours de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-velours-bleu-nuit.jpg",
+        "badge": "NOUVEAUTÉ"
+    },
+    {
+        "name": "Bleu ciel Veste en lin",
+        "price": "379 €",
+        "description": "Lin Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-lin-bleu.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu marine Blazer en laine",
+        "price": "449 €",
+        "description": "Laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/blazer-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Rose poudré Veste en lin",
+        "price": "265 €",
+        "description": "Lin Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-lin-rose.jpg",
+        "badge": "RÉDUCTION"
+    },
+    {
+        "name": "Brun chiné Veste en tweed",
+        "price": "489 €",
+        "description": "Tweed de laine Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-tweed-brun.jpg",
+        "badge": "NOUVEAUTÉ"
+    },
+    {
+        "name": "Vert forêt Veste en velours",
+        "price": "529 €",
+        "description": "Velours de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-velours-vert.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris anthracite Pantalon en flanelle",
+        "price": "189 €",
+        "description": "Flanelle de laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-flanelle-gris.jpg",
+        "badge": null
+    },
+    {
+        "name": "Beige Chino en coton",
+        "price": "129 €",
+        "description": "Coton stretch Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chino-coton-beige.jpg",
+        "badge": null
+    },
+    {
+        "name": "Écru Pantalon en lin",
+        "price": "159 €",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-lin-ecru.jpg",
+        "badge": "NOUVEAUTÉ"
+    },
+    {
+        "name": "Bleu marine Pantalon à pinces en laine",
+        "price": "199 €",
+        "description": "Laine Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Brun tabac Pantalon en velours côtelé",
+        "price": "143 €",
+        "description": "Velours côtelé Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-velours-cotele-brun.jpg",
+        "badge": "RÉDUCTION"
+    },
+    {
+        "name": "Blanc Chemise en popeline",
+        "price": "99 €",
+        "description": "Popeline de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-popeline-blanche.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu ciel Chemise en popeline",
+        "price": "99 €",
+        "description": "Popeline de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-popeline-bleu-ciel.jpg",
+        "badge": null
+    },
+    {
+        "name": "Blanc Chemise Oxford col boutonné",
+        "price": "109 €",
+        "description": "Coton Oxford Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-oxford-blanche.jpg",
+        "badge": null
+    },
+    {
+        "name": "Blanc Chemise en lin",
+        "price": "119 €",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-lin-blanche.jpg",
+        "badge": "NOUVEAUTÉ"
+    },
+    {
+        "name": "Bleu denim Chemise en lin",
+        "price": "95 €",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-lin-bleu.jpg",
+        "badge": "RÉDUCTION"
+    },
+    {
+        "name": "Blanc Chemise de smoking à plastron",
+        "price": "149 €",
+        "description": "Coton piqué Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-smoking-plastron.jpg",
+        "badge": null
+    }
+]

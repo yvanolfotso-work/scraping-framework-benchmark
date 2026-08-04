@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Bleu marine Costume deux-pi\u00e8ces en laine",
+        "price": "749 \u20ac",
+        "category": "Costumes",
+        "description": "Laine Super 110s Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris clair Costume deux-pi\u00e8ces en laine froide",
+        "price": "749 \u20ac",
+        "category": "Costumes",
+        "description": "Laine froide Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-laine-gris.jpg",
+        "badge": null
+    },
+    {
+        "name": "Beige sable Costume deux-pi\u00e8ces en lin",
+        "price": "454 \u20ac649 \u20ac",
+        "category": "Costumes",
+        "description": "Lin et coton Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-lin-beige.jpg",
+        "badge": "30\u00a0% DE R\u00c9DUCTION"
+    },
+    {
+        "name": "Vert olive Costume deux-pi\u00e8ces en lin",
+        "price": "454 \u20ac649 \u20ac",
+        "category": "Costumes",
+        "description": "Lin et coton Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-lin-vert.jpg",
+        "badge": "30\u00a0% DE R\u00c9DUCTION"
+    },
+    {
+        "name": "Gris anthracite Costume deux-pi\u00e8ces en flanelle",
+        "price": "829 \u20ac",
+        "category": "Costumes",
+        "description": "Flanelle de laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-flanelle-anthracite.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris et brun Costume Prince-de-Galles",
+        "price": "899 \u20ac",
+        "category": "Costumes",
+        "description": "Laine \u00e0 carreaux Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-carreaux-prince-de-galles.jpg",
+        "badge": null
+    },
+    {
+        "name": "Noir Smoking \u00e0 revers satin",
+        "price": "1\u202f090 \u20ac",
+        "category": "Costumes",
+        "description": "Laine et soie Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/smoking-noir.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu nuit Costume en velours",
+        "price": "949 \u20ac",
+        "category": "Costumes",
+        "description": "Velours de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/costume-velours-bleu-nuit.jpg",
+        "badge": "NOUVEAUT\u00c9"
+    },
+    {
+        "name": "Bleu ciel Veste en lin",
+        "price": "379 \u20ac",
+        "category": "Vestes & Blazers",
+        "description": "Lin Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-lin-bleu.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu marine Blazer en laine",
+        "price": "449 \u20ac",
+        "category": "Vestes & Blazers",
+        "description": "Laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/blazer-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Rose poudr\u00e9 Veste en lin",
+        "price": "265 \u20ac379 \u20ac",
+        "category": "Vestes & Blazers",
+        "description": "Lin Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-lin-rose.jpg",
+        "badge": "30\u00a0% DE R\u00c9DUCTION"
+    },
+    {
+        "name": "Brun chin\u00e9 Veste en tweed",
+        "price": "489 \u20ac",
+        "category": "Vestes & Blazers",
+        "description": "Tweed de laine Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-tweed-brun.jpg",
+        "badge": "NOUVEAUT\u00c9"
+    },
+    {
+        "name": "Vert for\u00eat Veste en velours",
+        "price": "529 \u20ac",
+        "category": "Vestes & Blazers",
+        "description": "Velours de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/veste-velours-vert.jpg",
+        "badge": null
+    },
+    {
+        "name": "Gris anthracite Pantalon en flanelle",
+        "price": "189 \u20ac",
+        "category": "Pantalons",
+        "description": "Flanelle de laine Tailored Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-flanelle-gris.jpg",
+        "badge": null
+    },
+    {
+        "name": "Beige Chino en coton",
+        "price": "129 \u20ac",
+        "category": "Autre",
+        "description": "Coton stretch Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chino-coton-beige.jpg",
+        "badge": null
+    },
+    {
+        "name": "\u00c9cru Pantalon en lin",
+        "price": "159 \u20ac",
+        "category": "Pantalons",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-lin-ecru.jpg",
+        "badge": "NOUVEAUT\u00c9"
+    },
+    {
+        "name": "Bleu marine Pantalon \u00e0 pinces en laine",
+        "price": "199 \u20ac",
+        "category": "Pantalons",
+        "description": "Laine Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-laine-marine.jpg",
+        "badge": null
+    },
+    {
+        "name": "Brun tabac Pantalon en velours c\u00f4tel\u00e9",
+        "price": "143 \u20ac179 \u20ac",
+        "category": "Pantalons",
+        "description": "Velours c\u00f4tel\u00e9 Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/pantalon-velours-cotele-brun.jpg",
+        "badge": "20\u00a0% DE R\u00c9DUCTION"
+    },
+    {
+        "name": "Blanc Chemise en popeline",
+        "price": "99 \u20ac",
+        "category": "Chemises",
+        "description": "Popeline de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-popeline-blanche.jpg",
+        "badge": null
+    },
+    {
+        "name": "Bleu ciel Chemise en popeline",
+        "price": "99 \u20ac",
+        "category": "Chemises",
+        "description": "Popeline de coton Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-popeline-bleu-ciel.jpg",
+        "badge": null
+    },
+    {
+        "name": "Blanc Chemise Oxford col boutonn\u00e9",
+        "price": "109 \u20ac",
+        "category": "Chemises",
+        "description": "Coton Oxford Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-oxford-blanche.jpg",
+        "badge": null
+    },
+    {
+        "name": "Blanc Chemise en lin",
+        "price": "119 \u20ac",
+        "category": "Chemises",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-lin-blanche.jpg",
+        "badge": "NOUVEAUT\u00c9"
+    },
+    {
+        "name": "Bleu denim Chemise en lin",
+        "price": "95 \u20ac119 \u20ac",
+        "category": "Chemises",
+        "description": "Lin Regular Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-lin-bleu.jpg",
+        "badge": "20\u00a0% DE R\u00c9DUCTION"
+    },
+    {
+        "name": "Blanc Chemise de smoking \u00e0 plastron",
+        "price": "149 \u20ac",
+        "category": "Chemises",
+        "description": "Coton piqu\u00e9 Slim Fit",
+        "image": "https://retail-pap.vercel.app/produits/chemise-smoking-plastron.jpg",
+        "badge": null
+    }
+]

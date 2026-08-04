@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\jojo\Documents\projetcts\Professionnelle_fig\Test Scraping\venv\Lib\site-packages\botasaurus\browser_decorator.py", line 199, in run_task
+    result = func(driver, data)
+             ^^^^^^^^^^^^^^^^^^
+TypeError: scrape_website() takes 1 positional argument but 2 were given
