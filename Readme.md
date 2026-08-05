@@ -335,6 +335,114 @@ Fichiers générés :
 
 ---
 
+### 4.5 Scrapling DynamicFetcher — Cas d'usage réel : Galeries Bartoux
+
+Au-delà du site de test `retail-pap.vercel.app`, la version robuste du DynamicFetcher a été mise en œuvre sur un cas réel : le site `galeries-bartoux.com`, qui référence des œuvres d'art classées par artiste.
+
+#### Emplacement du script
+
+```
+C:\Users\jojo\Documents\projetcts\Professionnelle_fig\Test Scraping\Scrapling_demos_clients\scrapling_bartoux.py
+```
+
+#### Structure finale des fichiers et dossiers
+
+Après exécution du script, l'arborescence générée est la suivante :
+
+```
+Scrapling_demos_clients\
+│
+├── scrapling_bartoux.py          ← script principal
+├── catalogue.json                ← catalogue complet (toutes les données)
+├── scraping_bartoux_final.log    ← logs détaillés
+│
+├── backups_final\                ← sauvegardes horodatées du catalogue
+│   ├── catalogue_20260805_133521.json
+│   ├── catalogue_20260805_143015.json
+│   └── ...
+│
+└── artistes\                     ← dossier principal des images
+    ├── al-freno\                 ← un sous-dossier par artiste (slugifié)
+    │   ├── a-whiter-shade-of-pale.jpg
+    │   ├── if-you-could-read-my-mind.jpg
+    │   ├── your-love-is-king.jpg
+    │   ├── i-only-have-eyes-for-you.jpg
+    │   ├── el-paso.jpg
+    │   └── lets-go.jpg
+    │
+    ├── chris-carolina\
+    │   ├── white-blouse.jpg
+    │   ├── blue-night.jpg
+    │   ├── drama-night.jpg
+    │   └── ...
+    │
+    ├── chris-riley\
+    │   ├── on-our-way.jpg
+    │   ├── fashionably-early.jpg
+    │   └── ...
+    │
+    ├── david-uessem\
+    │   ├── radiant-light.jpg
+    │   └── ...
+    │
+    └── (autres artistes...)
+```
+
+#### Structure du catalogue.json
+
+```json
+{
+  "a1b2c3d4e5f6g7h8": {
+    "id": "a1b2c3d4e5f6g7h8",
+    "source_url": "https://www.galeries-bartoux.com/artistes/al-freno/al-freno_a-whiter-shade-of-pale_150x150cm/",
+    "content_hash": "f7e8d9c0b1a2...",
+    "first_seen": "2026-08-05T13:36:53.059000+00:00",
+    "last_checked": "2026-08-05T13:36:53.059000+00:00",
+    "last_changed": "2026-08-05T13:36:53.059000+00:00",
+    "status": "active",
+    "data": {
+      "artist": "AL FRENO",
+      "title": "A WHITER SHADE OF PALE",
+      "dimensions": "150 x 150 cm",
+      "medium": null,
+      "year": null,
+      "image": "https://www.galeries-bartoux.com/wp-content/uploads/al-freno-a-whiter-shade-of-pale.jpg",
+      "local_image": "artistes/al-freno/a-whiter-shade-of-pale.jpg",
+      "url": "https://www.galeries-bartoux.com/artistes/al-freno/al-freno_a-whiter-shade-of-pale_150x150cm/",
+      "gallery": "Galeries Bartoux",
+      "description": "Peinture à l'huile sur toile...",
+      "searchable_text": "AL FRENO - A WHITER SHADE OF PALE - 150 x 150 cm"
+    },
+    "history": []
+  }
+  // ... autres œuvres
+}
+```
+
+#### Détail du contenu de chaque dossier
+
+1. **`artistes/`** (dossier principal)
+   - Contient un sous-dossier par artiste.
+   - Nom des dossiers : slugifiés (ex. `al-freno`, `chris-carolina`).
+
+2. **Sous-dossiers par artiste**
+   - Contiennent les images téléchargées.
+   - Nom des images : slug du titre + extension `.jpg`.
+
+3. **`backups_final/`**
+   - Sauvegarde du catalogue avant chaque mise à jour.
+   - Horodatage : `catalogue_AAAAMMJJ_HHMMSS.json`.
+
+4. **`catalogue.json`**
+   - Contient toutes les données scrapées.
+   - Liens vers les images locales.
+
+#### Conclusion
+
+Ce cas réel confirme, sur un site de production différent du site de test initial, les résultats obtenus avec la version robuste du DynamicFetcher : organisation automatique par artiste, téléchargement des images, suivi des modifications et sauvegardes horodatées, sans intervention manuelle.
+
+---
+
 ## 5. Tableau comparatif global
 
 | Critère                     | Scrapy       | Botasaurus             | Scrapling                   |
@@ -406,6 +514,8 @@ Sur le site `retail-pap.vercel.app` :
 - Botasaurus récupère directement les produits avec succès.
 - Scrapling DynamicFetcher récupère également les produits avec une approche plus légère.
 - Scrapling StealthyFetcher apporte une couche supplémentaire pour les sites protégés.
+
+Sur le cas réel `galeries-bartoux.com` (script `scrapling_bartoux.py`), la version robuste du DynamicFetcher a permis une extraction complète et organisée (images classées par artiste, catalogue structuré, sauvegardes automatiques), confirmant sa pertinence pour un déploiement chez un client.
 
 Le meilleur compromis observé pour un projet e-commerce moderne est :
 
