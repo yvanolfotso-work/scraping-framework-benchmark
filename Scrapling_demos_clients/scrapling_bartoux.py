@@ -1,5 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+scrap_bartoux.py
+------------------------------------------------------------------
+Scraper complet Galeries Bartoux :
+  - Parcourt les 3 sections (#peintres, #sculpteurs, #design) de
+    la page /artistes/ pour recuperer chaque artiste ET sa
+    categorie (Peintre / Sculpteur / Design).
+  - Pour chaque artiste, recupere sa VRAIE biographie (scrapee
+    directement depuis sa page, section "Biographie" -> aucune
+    generation automatique/fake, contrairement a transform_json.py
+    qui ne doit plus etre necessaire pour ce site).
+  - Parcourt ensuite les oeuvres de chaque artiste, telecharge les
+    images (nommees avec les dimensions quand disponibles).
+  - Detection de changement par hash (id/contenu) -> NOUVEAU /
+    CHANGE / INCHANGE / ORPHELIN, comme le reste du pipeline.
+
+Independant du repertoire d'execution : le script se place
+toujours dans son propre dossier au demarrage (os.chdir), donc
+catalogue.json / artistes/ / backups/ / logs sont toujours crees
+au meme endroit, peu importe d'ou tu lances `python scrap_bartoux.py`.
+
+Usage :
+    python scrap_bartoux.py
+------------------------------------------------------------------
+"""
+
+# --- Toujours travailler depuis le dossier du script ---
+from pathlib import Path
+import os
+
+BASE_DIR = Path(__file__).resolve().parent
+os.chdir(BASE_DIR)
+# --- FIN ---
+
 # --- PATCH browserforge Windows ---
 import browserforge.headers.generator as bf_gen
+
 
 def _fake_generate(self, **kwargs):
     return {
@@ -15,6 +52,7 @@ def _fake_generate(self, **kwargs):
         "Upgrade-Insecure-Requests": "1",
     }
 
+
 bf_gen.HeaderGenerator.generate = _fake_generate
 # --- FIN PATCH ---
 
@@ -23,13 +61,11 @@ import json
 import re
 import time
 import hashlib
-import os
 import shutil
 import logging
 import requests
 from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
-from pathlib import Path
 
 
 # ----------------------------------------------------------------------
@@ -42,17 +78,23 @@ ARTISTS_URL = "https://www.galeries-bartoux.com/artistes/"
 CATALOGUE_FILE = "catalogue.json"
 BACKUP_DIR = "backups"
 LOG_FILE = "scraping_bartoux.log"
-IMAGES_ROOT = "artistes"          # dossier principal des images
+IMAGES_ROOT = "artistes"
 
 MIN_RATIO_SECURITE = 0.35
 
-# Délais (plus longs = moins de timeouts)
 SLEEP_BETWEEN_ARTISTS = 3.5
 SLEEP_BETWEEN_ARTWORKS = 2.8
-PAGE_TIMEOUT = 60000              # 60 secondes
+PAGE_TIMEOUT = 60000
 
 MAX_ARTISTS = None                # mets 5 pour tester rapidement
 MAX_ARTWORKS_PER_ARTIST = None
+
+# Correspondance id de section HTML -> categorie lisible
+CATEGORY_LABELS = {
+    "peintres": "Peintre",
+    "sculpteurs": "Sculpteur",
+    "design": "Design",
+}
 
 
 # ----------------------------------------------------------------------
@@ -91,7 +133,6 @@ def absolute_url(href: str) -> str | None:
 
 
 def slugify(text: str) -> str:
-    """Transforme un texte en nom de fichier/dossier sûr"""
     if not text:
         return "unknown"
     text = text.lower().strip()
@@ -107,7 +148,6 @@ def slugify(text: str) -> str:
 
 
 def extract_dimensions_from_url(url: str) -> str | None:
-    """Extrait les dimensions depuis le slug de l'URL (très fiable sur Bartoux)"""
     match = re.search(
         r"(\d+[\s\-xX×]+\d+(?:[\s\-xX×]+\d+)?)\s*-?\s*cm",
         url, re.IGNORECASE
@@ -121,11 +161,10 @@ def extract_dimensions_from_url(url: str) -> str | None:
 
 
 def normalize_dimensions_for_filename(dimensions: str | None) -> str | None:
-    """Transforme '120 x 180 cm' → '120x180cm' pour le nom de fichier"""
     if not dimensions:
         return None
     dims = dimensions.lower()
-    dims = re.sub(r"[^\d]+", "x", dims)          # tout ce qui n'est pas chiffre → x
+    dims = re.sub(r"[^\d]+", "x", dims)
     dims = re.sub(r"x+", "x", dims).strip("x")
     if dims:
         return f"{dims}cm"
@@ -133,7 +172,6 @@ def normalize_dimensions_for_filename(dimensions: str | None) -> str | None:
 
 
 def download_image(img_url: str, save_path: Path) -> bool:
-    """Télécharge une image et la sauvegarde"""
     if not img_url:
         return False
     try:
@@ -149,15 +187,21 @@ def download_image(img_url: str, save_path: Path) -> bool:
                     f.write(chunk)
             return True
     except Exception as e:
-        log.warning(f"      Échec téléchargement image {img_url} : {e}")
+        log.warning(f"      Echec telechargement image {img_url} : {e}")
     return False
 
 
 # ----------------------------------------------------------------------
-# 1. ARTISTES
+# 1. ARTISTES (avec categorie Peintre / Sculpteur / Design)
 # ----------------------------------------------------------------------
 
 def get_artists() -> list[dict]:
+    """
+    Parcourt les 3 blocs <div class="Liste_Artistes" id="peintres|sculpteurs|design">
+    de la page /artistes/ pour recuperer chaque artiste avec sa
+    vraie categorie (pas de devinette : c'est la section HTML qui
+    le dit explicitement).
+    """
     log.info(f"Chargement page artistes : {ARTISTS_URL}")
     try:
         page = StealthyFetcher.fetch(
@@ -167,37 +211,77 @@ def get_artists() -> list[dict]:
             timeout=PAGE_TIMEOUT
         )
     except Exception as e:
-        log.error(f"Échec chargement page artistes : {e}")
+        log.error(f"Echec chargement page artistes : {e}")
         return []
 
     time.sleep(2)
 
     artists = []
-    links = page.css('a[href*="/artistes/"]')
-    seen = set()
+    seen_urls = set()
 
-    for a in links:
-        href = a.css("::attr(href)").get()
-        name = clean_text(a.css("::text").get() or a.get_all_text())
-        if not href or not name:
-            continue
-        full = absolute_url(href)
-        if not full or full.rstrip("/") == ARTISTS_URL.rstrip("/") or full in seen:
-            continue
-        if "/artistes/" in full and full.count("/") >= 4:
-            seen.add(full)
-            artists.append({"name": name, "url": full, "slug": slugify(name)})
+    sections = page.css("div.Liste_Artistes")
+    log.info(f"Sections trouvees : {len(sections)}")
 
-    log.info(f"Artistes trouvés : {len(artists)}")
+    for section in sections:
+        section_id = section.css("::attr(id)").get() or ""
+        category = CATEGORY_LABELS.get(section_id, section_id or "Inconnu")
+
+        articles = section.css("article")
+        for art in articles:
+            link = art.css("div.CA_Titre a")
+            href = link.css("::attr(href)").get()
+            name = clean_text(link.css("::text").get())
+
+            if not href or not name:
+                continue
+
+            full = absolute_url(href)
+            if not full or full in seen_urls:
+                continue
+
+            seen_urls.add(full)
+            artists.append({
+                "name": name,
+                "url": full,
+                "slug": slugify(name),
+                "category": category,
+            })
+
+        log.info(f"  {section_id} ({category}) : {len(articles)} artistes")
+
+    log.info(f"Total artistes trouves : {len(artists)}")
     return artists
 
 
 # ----------------------------------------------------------------------
-# 2. ŒUVRES D'UN ARTISTE
+# 2. BIO REELLE DE L'ARTISTE (scrapee, pas generee)
 # ----------------------------------------------------------------------
 
-def get_artworks_from_artist(artist: dict) -> list[dict]:
-    log.info(f"  → Artiste : {artist['name']}")
+def extract_artist_bio(page) -> str | None:
+    """
+    Recupere la vraie biographie depuis la section 'Biographie' de
+    la page artiste : <section itemprop="text"><p>...</p>...</section>
+    """
+    paragraphs = page.css("section[itemprop='text'] p::text").getall()
+    if not paragraphs:
+        # fallback plus large si la structure varie legerement
+        paragraphs = page.css("div.The_Content p::text").getall()
+
+    cleaned = [clean_text(p) for p in paragraphs]
+    cleaned = [p for p in cleaned if p and "cookie" not in p.lower()]
+
+    if not cleaned:
+        return None
+
+    return "\n\n".join(cleaned)
+
+
+# ----------------------------------------------------------------------
+# 3. OEUVRES D'UN ARTISTE + BIO (une seule visite de la page artiste)
+# ----------------------------------------------------------------------
+
+def get_artworks_from_artist(artist: dict) -> tuple[list[dict], str | None]:
+    log.info(f"  -> Artiste : {artist['name']} [{artist['category']}]")
     try:
         page = StealthyFetcher.fetch(
             artist["url"],
@@ -206,10 +290,17 @@ def get_artworks_from_artist(artist: dict) -> list[dict]:
             timeout=PAGE_TIMEOUT
         )
     except Exception as e:
-        log.error(f"    Échec page artiste {artist['name']} : {e}")
-        return []
+        log.error(f"    Echec page artiste {artist['name']} : {e}")
+        return [], None
 
     time.sleep(SLEEP_BETWEEN_ARTISTS)
+
+    # Bio reelle, recuperee sur cette meme page (pas de fetch en plus)
+    bio = extract_artist_bio(page)
+    if bio:
+        log.info(f"    Bio recuperee ({len(bio)} caracteres)")
+    else:
+        log.warning(f"    Aucune bio trouvee pour {artist['name']}")
 
     artworks = []
     links = page.css('a[href*="/artistes/"]')
@@ -231,15 +322,17 @@ def get_artworks_from_artist(artist: dict) -> list[dict]:
                 "url": full,
                 "artist_name": artist["name"],
                 "artist_slug": artist["slug"],
-                "artist_url": artist["url"]
+                "artist_url": artist["url"],
+                "artist_category": artist["category"],
+                "artist_bio": bio,
             })
 
-    log.info(f"    Œuvres candidates : {len(artworks)}")
-    return artworks
+    log.info(f"    Oeuvres candidates : {len(artworks)}")
+    return artworks, bio
 
 
 # ----------------------------------------------------------------------
-# 3. DÉTAIL + TÉLÉCHARGEMENT IMAGE
+# 4. DETAIL D'UNE OEUVRE + TELECHARGEMENT IMAGE
 # ----------------------------------------------------------------------
 
 def scrape_artwork_detail(item: dict) -> dict | None:
@@ -252,18 +345,16 @@ def scrape_artwork_detail(item: dict) -> dict | None:
             timeout=PAGE_TIMEOUT
         )
     except Exception as e:
-        log.warning(f"      Échec page œuvre {url} : {e}")
+        log.warning(f"      Echec page oeuvre {url} : {e}")
         return None
 
     time.sleep(SLEEP_BETWEEN_ARTWORKS)
 
-    # Détection des fausses pages (redirection 301 vers la page artiste)
     current_url = str(getattr(page, "url", url))
     if current_url.rstrip("/") == item["artist_url"].rstrip("/"):
-        log.warning(f"      Redirection vers page artiste → ignoré : {url}")
+        log.warning(f"      Redirection vers page artiste -> ignore : {url}")
         return None
 
-    # --- Titre ---
     title = (
         page.css("h1::text").get()
         or page.css("h1 *::text").get()
@@ -281,7 +372,6 @@ def scrape_artwork_detail(item: dict) -> dict | None:
 
     artist = item.get("artist_name")
 
-    # --- Dimensions / Technique / Année ---
     text = page.get_all_text() or ""
 
     dimensions = None
@@ -295,7 +385,6 @@ def scrape_artwork_detail(item: dict) -> dict | None:
     if not dimensions:
         dimensions = extract_dimensions_from_url(url)
         if dimensions:
-            # remettre un format lisible
             dimensions = dimensions.replace("x", " x ").replace("cm", " cm")
 
     if not dimensions:
@@ -303,15 +392,14 @@ def scrape_artwork_detail(item: dict) -> dict | None:
         if dim_fallback:
             dimensions = clean_text(dim_fallback.group(1))
 
-    tech_match = re.search(r"(?:Technique|Matériau|Medium)\s*[:\n]*\s*([^\n]{3,140})", text, re.I)
+    tech_match = re.search(r"(?:Technique|Materiau|Medium)\s*[:\n]*\s*([^\n]{3,140})", text, re.I)
     if tech_match:
         medium = clean_text(tech_match.group(1))
 
-    year_match = re.search(r"(?:Année|Year)\s*[:\n]*\s*(\d{4})", text, re.I)
+    year_match = re.search(r"(?:Annee|Year)\s*[:\n]*\s*(\d{4})", text, re.I)
     if year_match:
         year = year_match.group(1)
 
-    # --- Image ---
     image = (
         page.css("img.wp-post-image::attr(src)").get()
         or page.css(".oeuvre-image img::attr(src)").get()
@@ -321,7 +409,6 @@ def scrape_artwork_detail(item: dict) -> dict | None:
     )
     image = absolute_url(image) if image else None
 
-    # --- Description ---
     description = None
     for p in page.css("p::text")[:6]:
         t = clean_text(p)
@@ -329,18 +416,13 @@ def scrape_artwork_detail(item: dict) -> dict | None:
             description = t
             break
 
-    # --- Téléchargement de l'image (nom avec dimensions si présentes) ---
     local_image_path = None
     if image:
         artist_slug = item["artist_slug"]
         artwork_slug = slugify(title or url.rstrip("/").split("/")[-1])
 
-        # Ajout des dimensions dans le nom de fichier
         dims_for_file = normalize_dimensions_for_filename(dimensions)
-        if dims_for_file:
-            filename_base = f"{artwork_slug}-{dims_for_file}"
-        else:
-            filename_base = artwork_slug
+        filename_base = f"{artwork_slug}-{dims_for_file}" if dims_for_file else artwork_slug
 
         ext = Path(urlparse(image).path).suffix.lower()
         if ext not in [".jpg", ".jpeg", ".png", ".webp"]:
@@ -350,12 +432,14 @@ def scrape_artwork_detail(item: dict) -> dict | None:
 
         if download_image(image, save_path):
             local_image_path = str(save_path).replace("\\", "/")
-            log.info(f"      📷 Image sauvée → {local_image_path}")
+            log.info(f"      Image sauvee -> {local_image_path}")
         else:
-            log.warning(f"      Image non téléchargée : {image}")
+            log.warning(f"      Image non telechargee : {image}")
 
     data = {
         "artist": artist,
+        "artist_category": item.get("artist_category"),
+        "artist_bio": item.get("artist_bio"),
         "title": title,
         "dimensions": dimensions,
         "medium": medium,
@@ -366,12 +450,12 @@ def scrape_artwork_detail(item: dict) -> dict | None:
         "gallery": "Galeries Bartoux",
         "description": description,
         "searchable_text": " - ".join(
-            filter(None, [artist, title, dimensions, medium, year])
+            filter(None, [artist, item.get("artist_category"), title, dimensions, medium, year])
         )
     }
 
     if not title or not artist:
-        log.warning(f"      Œuvre incomplète ignorée : {url}")
+        log.warning(f"      Oeuvre incomplete ignoree : {url}")
         return None
 
     return {
@@ -381,7 +465,7 @@ def scrape_artwork_detail(item: dict) -> dict | None:
 
 
 # ----------------------------------------------------------------------
-# 4. SCRAPING COMPLET
+# 5. SCRAPING COMPLET
 # ----------------------------------------------------------------------
 
 def scrape_all() -> list:
@@ -391,7 +475,7 @@ def scrape_all() -> list:
 
     all_items = []
     for artist in artists:
-        artworks = get_artworks_from_artist(artist)
+        artworks, _bio = get_artworks_from_artist(artist)
         if MAX_ARTWORKS_PER_ARTIST:
             artworks = artworks[:MAX_ARTWORKS_PER_ARTIST]
 
@@ -400,14 +484,14 @@ def scrape_all() -> list:
             if detail:
                 all_items.append(detail)
                 d = detail["data"]
-                log.info(f"      ✓ {d.get('title')} | {d.get('dimensions')}")
+                log.info(f"      OK {d.get('title')} | {d.get('dimensions')}")
 
-    log.info(f"Total œuvres valides extraites : {len(all_items)}")
+    log.info(f"Total oeuvres valides extraites : {len(all_items)}")
     return all_items
 
 
 # ----------------------------------------------------------------------
-# 5. ID + HASH + CATALOGUE
+# 6. ID + HASH + CATALOGUE (logique inchangee, id base sur l'URL)
 # ----------------------------------------------------------------------
 
 def make_id(item: dict) -> str:
@@ -440,7 +524,7 @@ def backup_catalogue():
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_path = os.path.join(BACKUP_DIR, f"catalogue_{stamp}.json")
     shutil.copy2(CATALOGUE_FILE, backup_path)
-    log.info(f"Backup créé : {backup_path}")
+    log.info(f"Backup cree : {backup_path}")
 
 
 def save_catalogue(catalogue: dict):
@@ -484,7 +568,7 @@ def merge_catalogue(catalogue: dict, scraped_items: list) -> dict:
                 "data": data,
                 "history": []
             }
-            log.info(f"[NOUVEAU]   {data.get('artist')} – {data.get('title')}")
+            log.info(f"[NOUVEAU]   {data.get('artist')} ({data.get('artist_category')}) - {data.get('title')}")
         else:
             entry = catalogue[pid]
             entry["last_checked"] = timestamp
@@ -500,7 +584,7 @@ def merge_catalogue(catalogue: dict, scraped_items: list) -> dict:
                 entry["content_hash"] = chash
                 entry["data"] = data
                 entry["last_changed"] = timestamp
-                log.info(f"[CHANGÉ]    {data.get('title')} → {changes}")
+                log.info(f"[CHANGE]    {data.get('title')} -> {changes}")
             else:
                 if data.get("local_image"):
                     entry["data"]["local_image"] = data["local_image"]
@@ -515,12 +599,12 @@ def merge_catalogue(catalogue: dict, scraped_items: list) -> dict:
 
 
 # ----------------------------------------------------------------------
-# 6. MAIN
+# 7. MAIN
 # ----------------------------------------------------------------------
 
 def main():
     log.info("=" * 60)
-    log.info("Démarrage scraping Galeries Bartoux + images avec dimensions")
+    log.info("Demarrage scraping Galeries Bartoux (categorie + bio reelle)")
     log.info("=" * 60)
 
     Path(IMAGES_ROOT).mkdir(exist_ok=True)
@@ -528,7 +612,7 @@ def main():
     scraped = scrape_all()
 
     if not scraped:
-        log.error("Aucune œuvre valide extraite. Arrêt sans toucher au catalogue.")
+        log.error("Aucune oeuvre valide extraite. Arret sans toucher au catalogue.")
         return
 
     catalogue = load_catalogue()
@@ -539,9 +623,9 @@ def main():
             ratio = len(scraped) / nb_actifs_avant
             if ratio < MIN_RATIO_SECURITE:
                 log.error(
-                    f"Scraping suspect : {len(scraped)} œuvres trouvées "
+                    f"Scraping suspect : {len(scraped)} oeuvres trouvees "
                     f"contre {nb_actifs_avant} attendues (ratio {ratio:.0%}). "
-                    f"Catalogue NON modifié."
+                    f"Catalogue NON modifie."
                 )
                 return
 
@@ -553,15 +637,24 @@ def main():
     active = sum(1 for e in catalogue.values() if e["status"] == "active")
     orphans = sum(1 for e in catalogue.values() if e["status"] == "orphan")
     with_image = sum(1 for e in catalogue.values() if e["data"].get("local_image"))
+    with_bio = sum(1 for e in catalogue.values() if e["data"].get("artist_bio"))
 
-    log.info("===== RÉSUMÉ =====")
+    by_category = {}
+    for e in catalogue.values():
+        cat = e["data"].get("artist_category") or "Inconnu"
+        by_category[cat] = by_category.get(cat, 0) + 1
+
+    log.info("===== RESUME =====")
     log.info(f"Total catalogue     : {total}")
     log.info(f"Actifs              : {active}")
     log.info(f"Orphelins           : {orphans}")
     log.info(f"Avec image locale   : {with_image}")
+    log.info(f"Avec bio reelle     : {with_bio}")
+    for cat, n in by_category.items():
+        log.info(f"  - {cat:<12} : {n}")
     log.info(f"Dossier images      : {IMAGES_ROOT}/")
     log.info(f"Fichier             : {CATALOGUE_FILE}")
-    log.info("Terminé.")
+    log.info("Termine.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,53 @@
+2026-08-11 12:41:00,030 [INFO] Ouverture navigateur : https://the-real-fragrances.vercel.app/
+2026-08-11 12:41:17,439 [INFO] Fetched (200) <GET https://the-real-fragrances.vercel.app/> (referer: https://www.google.com/)
+2026-08-11 12:41:22,683 [INFO] Nombre articles trouves (bruts) : 19
+2026-08-11 12:41:39,478 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/invictus.png) : HTTP Error 404: Not Found
+2026-08-11 12:41:41,001 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/le-male.jpeg) : HTTP Error 404: Not Found
+2026-08-11 12:41:41,424 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpeg) : HTTP Error 404: Not Found
+2026-08-11 12:41:50,332 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpeg) : HTTP Error 404: Not Found
+2026-08-11 12:41:50,787 [INFO] Produits valides extraits : 19
+2026-08-11 12:41:50,788 [INFO] [NOUVEAU]   ACQUA DI GIÒ
+2026-08-11 12:41:50,788 [INFO] [NOUVEAU]   AZZARO WANTED
+2026-08-11 12:41:50,788 [INFO] [NOUVEAU]   BLEU DE CHANEL
+2026-08-11 12:41:50,788 [INFO] [NOUVEAU]   BOIS D’ARGENT
+2026-08-11 12:41:50,789 [INFO] [NOUVEAU]   COCO MADEMOISELLE
+2026-08-11 12:41:50,789 [INFO] [NOUVEAU]   GOOD GIRL
+2026-08-11 12:41:50,789 [INFO] [NOUVEAU]   HYPNOTIC POISON
+2026-08-11 12:41:50,789 [INFO] [NOUVEAU]   INVICTUS
+2026-08-11 12:41:50,789 [INFO] [NOUVEAU]   L’INTERDIT GIVENCHY
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   LA VIE EST BELLE
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   LE MÂLE
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   LIBRE YSL
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   MAD ABOUT YOU
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   OUD FOR GREATNESS
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   OUD MARACUJA
+2026-08-11 12:41:50,790 [INFO] [NOUVEAU]   PRÉSIDENTIAL OUD
+2026-08-11 12:41:50,791 [INFO] [NOUVEAU]   RED TOBACCO
+2026-08-11 12:41:50,791 [INFO] [NOUVEAU]   SÌ GIORGIO ARMANI
+2026-08-11 12:41:50,791 [INFO] [NOUVEAU]   STRONGER WITH YOU
+2026-08-11 12:41:50,793 [INFO] ===== RESUME =====
+2026-08-11 12:41:50,793 [INFO] Total catalogue : 19
+2026-08-11 12:41:50,793 [INFO] Actifs          : 19
+2026-08-11 12:41:50,793 [INFO] Orphelins       : 0
+2026-08-11 12:41:50,793 [INFO] Modifies (ce run) : 0
+2026-08-11 12:41:50,793 [INFO] Fichier          : catalogue_fragrances.json
+2026-08-11 12:41:50,793 [INFO] Images dans      : images/
+2026-08-11 13:17:03,562 [INFO] Ouverture navigateur : https://the-real-fragrances.vercel.app/
+2026-08-11 13:17:12,730 [INFO] Fetched (200) <GET https://the-real-fragrances.vercel.app/> (referer: https://www.google.com/)
+2026-08-11 13:17:17,979 [INFO] Nombre articles trouves (bruts) : 19
+2026-08-11 13:17:18,396 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/invictus.JPEG) : HTTP Error 404: Not Found
+2026-08-11 13:17:23,769 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG) : HTTP Error 404: Not Found
+2026-08-11 13:17:27,183 [INFO] Produits valides extraits : 19
+2026-08-11 13:17:27,185 [INFO] Backup cree : backups\catalogue_20260811_131727.json
+2026-08-11 13:17:27,186 [INFO] [CHANGE]    BLEU DE CHANEL -> {'famille_olfactive': {'avant': 'Boisé Aromatique', 'apres': 'Boisé Aromatique Signature'}, 'description': {'avant': 'L’éloge de la liberté masculine dans un sillage boisé aromatique au caractère captivant. Un parfum intemporel, puissant, élégant et résolument moderne.', 'apres': 'L’éloge de la liberté masculine dans un sillage boisé aromatique repensé, plus intense et plus captivant que jamais. Un parfum intemporel, puissant, élégant et résolument moderne.'}}
+2026-08-11 13:17:27,186 [INFO] [CHANGE]    INVICTUS -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/invictus.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/invictus.JPEG'}}
+2026-08-11 13:17:27,186 [INFO] [CHANGE]    LE MÂLE -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/le-male.jpeg', 'apres': 'https://the-real-fragrances.vercel.app/parfums/le-male.png'}, 'image_local': {'avant': None, 'apres': 'images\\le-male.png'}}
+2026-08-11 13:17:27,186 [INFO] [CHANGE]    LIBRE YSL -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpeg', 'apres': 'https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG'}}
+2026-08-11 13:17:27,187 [INFO] [CHANGE]    SÌ GIORGIO ARMANI -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpeg', 'apres': 'https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png'}, 'image_local': {'avant': None, 'apres': 'images\\si-giorgio-armani.png'}}
+2026-08-11 13:17:27,189 [INFO] ===== RESUME =====
+2026-08-11 13:17:27,189 [INFO] Total catalogue : 19
+2026-08-11 13:17:27,190 [INFO] Actifs          : 19
+2026-08-11 13:17:27,190 [INFO] Orphelins       : 0
+2026-08-11 13:17:27,190 [INFO] Modifies (ce run) : 5
+2026-08-11 13:17:27,190 [INFO] Fichier          : catalogue_fragrances.json
+2026-08-11 13:17:27,190 [INFO] Images dans      : images/

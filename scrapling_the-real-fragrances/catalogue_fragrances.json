@@ -1,0 +1,501 @@
+{
+  "45d536a42a925258": {
+    "id": "45d536a42a925258",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "502df206d44b415aa58c57afe5d679b1cbd996034f64195df7a8c58660c472aa",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "ACQUA DI GIÒ",
+      "famille_olfactive": "Aromatic Aquatique",
+      "inspire_par": "Inspiré par Acqua Di Giò de Giorgio Armani",
+      "description": "Un parfum mythique né de la mer, du soleil, du vent et de la liberté des îles méditerranéennes. Une fraîcheur océanique absolue, à la fois transparente, virile et épurée.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/acqua-di-gio.jpg",
+      "image_local": "images\\acqua-di-gio.jpg",
+      "searchable_text": "ACQUA DI GIÒ - Aromatic Aquatique - Un parfum mythique né de la mer, du soleil, du vent et de la liberté des îles méditerranéennes. Une fraîcheur océanique absolue, à la fois transparente, virile et épurée. - Inspiré par Acqua Di Giò de Giorgio Armani - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "70a270237a91e2ae": {
+    "id": "70a270237a91e2ae",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "9f9fd214f062ccdf741a8e602574c45bf2f7efd5f474bb36329ebfc74ead380d",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "AZZARO WANTED",
+      "famille_olfactive": "Boisé Épicé Solaire",
+      "inspire_par": "Inspiré par Azzaro Wanted",
+      "description": "L’arme secrète du séducteur charismatique. Un parfum solaire, rebelle et élégant qui mêle la fraîcheur du gingembre à la chaleur ardente de la fève tonka.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/azzaro-wanted.jpg",
+      "image_local": "images\\azzaro-wanted.jpg",
+      "searchable_text": "AZZARO WANTED - Boisé Épicé Solaire - L’arme secrète du séducteur charismatique. Un parfum solaire, rebelle et élégant qui mêle la fraîcheur du gingembre à la chaleur ardente de la fève tonka. - Inspiré par Azzaro Wanted - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "68cb9f9aa85b6d03": {
+    "id": "68cb9f9aa85b6d03",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "59e7035b8bd3246feb8e732ce7d032057e8354dd8c039e5372bf0f5ff49974be",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
+    "status": "active",
+    "data": {
+      "name": "BLEU DE CHANEL",
+      "famille_olfactive": "Boisé Aromatique Signature",
+      "inspire_par": "Inspiré par Bleu de Chanel",
+      "description": "L’éloge de la liberté masculine dans un sillage boisé aromatique repensé, plus intense et plus captivant que jamais. Un parfum intemporel, puissant, élégant et résolument moderne.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/bleu-de-chanel.jpg",
+      "image_local": "images\\bleu-de-chanel.jpg",
+      "searchable_text": "BLEU DE CHANEL - Boisé Aromatique Signature - L’éloge de la liberté masculine dans un sillage boisé aromatique repensé, plus intense et plus captivant que jamais. Un parfum intemporel, puissant, élégant et résolument moderne. - Inspiré par Bleu de Chanel - 3 500 FCFA"
+    },
+    "history": [
+      {
+        "date": "2026-08-11T12:17:27.186303+00:00",
+        "changes": {
+          "famille_olfactive": {
+            "avant": "Boisé Aromatique",
+            "apres": "Boisé Aromatique Signature"
+          },
+          "description": {
+            "avant": "L’éloge de la liberté masculine dans un sillage boisé aromatique au caractère captivant. Un parfum intemporel, puissant, élégant et résolument moderne.",
+            "apres": "L’éloge de la liberté masculine dans un sillage boisé aromatique repensé, plus intense et plus captivant que jamais. Un parfum intemporel, puissant, élégant et résolument moderne."
+          }
+        }
+      }
+    ]
+  },
+  "5b5aedfef4756870": {
+    "id": "5b5aedfef4756870",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "963991656f8d2f7d78462b08cfef182eda12bc027e7b6aaf7ff9f18768148b97",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "BOIS D’ARGENT",
+      "famille_olfactive": "Ambré Boisé Poudré",
+      "inspire_par": "Inspiré par Bois d’Argent de Dior",
+      "description": "Une icône olfactive mystique d’un raffinement ultime. Ce parfum mixte haut de gamme joue sur le contraste raffiné d’une fleur d’iris poudrée et de l’encens mystique réchauffé de miel.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Mixte",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/bois-dargent.png",
+      "image_local": "images\\bois-dargent.png",
+      "searchable_text": "BOIS D’ARGENT - Ambré Boisé Poudré - Une icône olfactive mystique d’un raffinement ultime. Ce parfum mixte haut de gamme joue sur le contraste raffiné d’une fleur d’iris poudrée et de l’encens mystique réchauffé de miel. - Inspiré par Bois d’Argent de Dior - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "bb54fc1fdb2bfeef": {
+    "id": "bb54fc1fdb2bfeef",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "4aaafce231202b4083afa2abb9a0b7d58a359a55c8a4124f0316600a66af066f",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "COCO MADEMOISELLE",
+      "famille_olfactive": "Ambré Floral",
+      "inspire_par": "Inspiré par Coco Mademoiselle de Chanel",
+      "description": "L’essence d’une femme libre et audacieuse. Un sillage oriental féminin au caractère affirmé et d’une fraîcheur étonnante, symbole absolu d’élégance française.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.png",
+      "image_local": "images\\coco-mademoiselle.png",
+      "searchable_text": "COCO MADEMOISELLE - Ambré Floral - L’essence d’une femme libre et audacieuse. Un sillage oriental féminin au caractère affirmé et d’une fraîcheur étonnante, symbole absolu d’élégance française. - Inspiré par Coco Mademoiselle de Chanel - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "6ddd582df8922f51": {
+    "id": "6ddd582df8922f51",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "7185585f00e5c366a9d3f0f8995bbcdb8c06416715de8abaf235c927c4b4698e",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "GOOD GIRL",
+      "famille_olfactive": "Ambré Fleuri Intense",
+      "inspire_par": "Inspiré par Good Girl de Carolina Herrera",
+      "description": "Révélez votre dualité audacieuse avec cette fragrance hautement séductrice. L’éclat floral et lumineux du jasmin sambac chevauche l’ombre gourmande et mystérieuse du cacao et de la fève tonka.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/good-girl.jpg",
+      "image_local": "images\\good-girl.jpg",
+      "searchable_text": "GOOD GIRL - Ambré Fleuri Intense - Révélez votre dualité audacieuse avec cette fragrance hautement séductrice. L’éclat floral et lumineux du jasmin sambac chevauche l’ombre gourmande et mystérieuse du cacao et de la fève tonka. - Inspiré par Good Girl de Carolina Herrera - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "6cf8a95fa876c1b6": {
+    "id": "6cf8a95fa876c1b6",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "d82bf1a12cd2aed125a003a5077920c9f81553591fd3fc80cc4e51b0309011a9",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "HYPNOTIC POISON",
+      "famille_olfactive": "Oriental Vanillé",
+      "inspire_par": "Inspiré par Hypnotic Poison de Dior",
+      "description": "Un parfum d’un magnétisme fatal, mystérieux et ensorcelant. Conçu comme un philtre d’amour moderne, alliant l’amande amère à la sensualité suave d’une vanille charnelle obsédante.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/hypnotic-poison.jpg",
+      "image_local": "images\\hypnotic-poison.jpg",
+      "searchable_text": "HYPNOTIC POISON - Oriental Vanillé - Un parfum d’un magnétisme fatal, mystérieux et ensorcelant. Conçu comme un philtre d’amour moderne, alliant l’amande amère à la sensualité suave d’une vanille charnelle obsédante. - Inspiré par Hypnotic Poison de Dior - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "c1fa5ab86c6c5ac7": {
+    "id": "c1fa5ab86c6c5ac7",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "06b8b29f18759bea3ede9831842606fe0a7b2d40e37b6cf065239d814db9831b",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
+    "status": "active",
+    "data": {
+      "name": "INVICTUS",
+      "famille_olfactive": "Boisé Aquatique",
+      "inspire_par": "Inspiré par Invictus de Paco Rabanne",
+      "description": "Une fragrance fraîche, héroïque et boisée, conçue pour l’homme victorieux. Un choc olfactif sensuel entre une fraîcheur marine saisissante et la chaleur magnétique du bois de gaïac.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/invictus.JPEG",
+      "image_local": null,
+      "searchable_text": "INVICTUS - Boisé Aquatique - Une fragrance fraîche, héroïque et boisée, conçue pour l’homme victorieux. Un choc olfactif sensuel entre une fraîcheur marine saisissante et la chaleur magnétique du bois de gaïac. - Inspiré par Invictus de Paco Rabanne - 3 500 FCFA"
+    },
+    "history": [
+      {
+        "date": "2026-08-11T12:17:27.186303+00:00",
+        "changes": {
+          "image_url": {
+            "avant": "https://the-real-fragrances.vercel.app/parfums/invictus.png",
+            "apres": "https://the-real-fragrances.vercel.app/parfums/invictus.JPEG"
+          }
+        }
+      }
+    ]
+  },
+  "7e774f562e6865c0": {
+    "id": "7e774f562e6865c0",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "73ef95bb98767c3a2e08ae6dc6bbbbc3ca7fb8b5ffc13f9b1dfca1bb3e10f411",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "L’INTERDIT GIVENCHY",
+      "famille_olfactive": "Floral Blanc Boisé",
+      "inspire_par": "Inspiré par L’Interdit de Givenchy",
+      "description": "Une invitation à franchir les limites et à ressentir le frisson de l’interdit. Le choc subversif d’un grand bouquet de fleurs blanches charnelles (tubéreuse, jasmin) et d’un accord sombre boisé.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/linterdit-givenchy.jpg",
+      "image_local": "images\\linterdit-givenchy.jpg",
+      "searchable_text": "L’INTERDIT GIVENCHY - Floral Blanc Boisé - Une invitation à franchir les limites et à ressentir le frisson de l’interdit. Le choc subversif d’un grand bouquet de fleurs blanches charnelles (tubéreuse, jasmin) et d’un accord sombre boisé. - Inspiré par L’Interdit de Givenchy - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "9285884bddef20b7": {
+    "id": "9285884bddef20b7",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "1a76a9dca5c106c2299e5d41755574c0cad4f2e63290112f1c65576f4eb28fa6",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "LA VIE EST BELLE",
+      "famille_olfactive": "Floral Fruité Gourmand",
+      "inspire_par": "Inspiré par La Vie Est Belle de Lancôme",
+      "description": "Une déclaration universelle au bonheur et à la féminité poétique. Centré autour de la rareté de l’iris, ce parfum offre un cœur savoureux de fruits mûrs et une base délicieusement gourmande.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/la-vie-est-belle.jpg",
+      "image_local": "images\\la-vie-est-belle.jpg",
+      "searchable_text": "LA VIE EST BELLE - Floral Fruité Gourmand - Une déclaration universelle au bonheur et à la féminité poétique. Centré autour de la rareté de l’iris, ce parfum offre un cœur savoureux de fruits mûrs et une base délicieusement gourmande. - Inspiré par La Vie Est Belle de Lancôme - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "a8e21e9c1fea7ffe": {
+    "id": "a8e21e9c1fea7ffe",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "b508bda0fd5d6228e9b234840a27769392fa6980cd65232296919a6c7071b665",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
+    "status": "active",
+    "data": {
+      "name": "LE MÂLE",
+      "famille_olfactive": "Oriental Fougère",
+      "inspire_par": "Inspiré par Le Mâle de Jean Paul Gaultier",
+      "description": "Aussi viril que sensible, ce sillage revisite la lavande traditionnelle avec sensualité et douceur. Une vanille réconfortante apporte une puissance magnétique irrésistible.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/le-male.png",
+      "image_local": "images\\le-male.png",
+      "searchable_text": "LE MÂLE - Oriental Fougère - Aussi viril que sensible, ce sillage revisite la lavande traditionnelle avec sensualité et douceur. Une vanille réconfortante apporte une puissance magnétique irrésistible. - Inspiré par Le Mâle de Jean Paul Gaultier - 3 500 FCFA"
+    },
+    "history": [
+      {
+        "date": "2026-08-11T12:17:27.186303+00:00",
+        "changes": {
+          "image_url": {
+            "avant": "https://the-real-fragrances.vercel.app/parfums/le-male.jpeg",
+            "apres": "https://the-real-fragrances.vercel.app/parfums/le-male.png"
+          },
+          "image_local": {
+            "avant": null,
+            "apres": "images\\le-male.png"
+          }
+        }
+      }
+    ]
+  },
+  "3de2f704f5e59f3f": {
+    "id": "3de2f704f5e59f3f",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "fddac780250bddd05bd446e3edbbf1c51a783d0646f5e9065f4ee59f0cc071ab",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
+    "status": "active",
+    "data": {
+      "name": "LIBRE YSL",
+      "famille_olfactive": "Ambré Fougère Féminin",
+      "inspire_par": "Inspiré par Libre d’Yves Saint Laurent",
+      "description": "Le parfum de la liberté sans compromis. L’élégance d’une lavande de France historiquement masculine est sublimée par la sensualité torride de la fleur d’oranger du Maroc dans un sillage haute couture.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG",
+      "image_local": null,
+      "searchable_text": "LIBRE YSL - Ambré Fougère Féminin - Le parfum de la liberté sans compromis. L’élégance d’une lavande de France historiquement masculine est sublimée par la sensualité torride de la fleur d’oranger du Maroc dans un sillage haute couture. - Inspiré par Libre d’Yves Saint Laurent - 3 500 FCFA"
+    },
+    "history": [
+      {
+        "date": "2026-08-11T12:17:27.186303+00:00",
+        "changes": {
+          "image_url": {
+            "avant": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpeg",
+            "apres": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG"
+          }
+        }
+      }
+    ]
+  },
+  "3c4a9b8ec245f6cf": {
+    "id": "3c4a9b8ec245f6cf",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "2d4d42ccf2dbdb6718bcacfacf5f2e467b7bd5504018a7e2775ecb1161c4ff77",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "MAD ABOUT YOU",
+      "famille_olfactive": "Floral Fruité Envoûtant",
+      "inspire_par": "Inspiré par Mad About You",
+      "description": "Un hymne à la passion et au romantisme pétillant. Ce sillage dévoile une symphonie joyeuse de pivoines délicates mariées à des fruits rouges confits sur un lit boisé romantique d’une grande féminité.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/mad-about-you.jpg",
+      "image_local": "images\\mad-about-you.jpg",
+      "searchable_text": "MAD ABOUT YOU - Floral Fruité Envoûtant - Un hymne à la passion et au romantisme pétillant. Ce sillage dévoile une symphonie joyeuse de pivoines délicates mariées à des fruits rouges confits sur un lit boisé romantique d’une grande féminité. - Inspiré par Mad About You - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "885c7fcf2b6dcd9d": {
+    "id": "885c7fcf2b6dcd9d",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "d58628dd68325c315b571886264e7caf9d5b333251d6e101df478eaad3d40e48",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "OUD FOR GREATNESS",
+      "famille_olfactive": "Boisé Épicé Sublime",
+      "inspire_par": "Inspiré par Oud for Greatness d’Initio",
+      "description": "Une fragrance hautement vibrante, mystique et sacrée. Elle tire sa majesté de l’oud naturel, transcendé dans une formule envoûtante enrichie de safran chaleureux et de lavande contrastante.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Mixte",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/oud-for-greatness.jpg",
+      "image_local": "images\\oud-for-greatness.jpg",
+      "searchable_text": "OUD FOR GREATNESS - Boisé Épicé Sublime - Une fragrance hautement vibrante, mystique et sacrée. Elle tire sa majesté de l’oud naturel, transcendé dans une formule envoûtante enrichie de safran chaleureux et de lavande contrastante. - Inspiré par Oud for Greatness d’Initio - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "695aa46700e5b3a4": {
+    "id": "695aa46700e5b3a4",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "cca94b28ef8e63b265b388e10116c0d3884ba593e0fad6c256ab60b382efe834",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "OUD MARACUJA",
+      "famille_olfactive": "Boisé Cuiré Solaire",
+      "inspire_par": "Inspiré par Oud Maracuja de Maison Crivelli",
+      "description": "Une union sensorielle fulgurante et inattendue entre la profondeur boisée du bois d’oud et les accents exotiques et charnus du fruit de la passion (maracuja).",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Mixte",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/oud-maracuja.jpg",
+      "image_local": "images\\oud-maracuja.jpg",
+      "searchable_text": "OUD MARACUJA - Boisé Cuiré Solaire - Une union sensorielle fulgurante et inattendue entre la profondeur boisée du bois d’oud et les accents exotiques et charnus du fruit de la passion (maracuja). - Inspiré par Oud Maracuja de Maison Crivelli - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "54d9abece8168972": {
+    "id": "54d9abece8168972",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "1f80ed483f13c4c1489b601b5502ce74b750f6c71e6a10ef2baf3ed7cb27fdbc",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "PRÉSIDENTIAL OUD",
+      "famille_olfactive": "Ambré Boisé Royal",
+      "inspire_par": "Inspiré des plus grandes essences royales d’Oud",
+      "description": "Une essence majestueuse synonyme de prestige et d’autorité. Conçue pour ceux qui imposent leur leadership naturel à travers un sillage boisé impérial enveloppé de fumées résineuses d’exception.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Mixte",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/presidential-oud.png",
+      "image_local": "images\\presidential-oud.png",
+      "searchable_text": "PRÉSIDENTIAL OUD - Ambré Boisé Royal - Une essence majestueuse synonyme de prestige et d’autorité. Conçue pour ceux qui imposent leur leadership naturel à travers un sillage boisé impérial enveloppé de fumées résineuses d’exception. - Inspiré des plus grandes essences royales d’Oud - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "9578665d72434f9b": {
+    "id": "9578665d72434f9b",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "ec2b9a1df1a4573355a2a5d227d466f43b2a3bd75f0f8f009b3817f370898476",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "RED TOBACCO",
+      "famille_olfactive": "Boisé Épicé Intense",
+      "inspire_par": "Inspiré par Red Tobacco de Mancera",
+      "description": "Un parfum incendiaire d’un magnétisme hors norme. Conçu autour d’une alliance enivrante de tabac cubain brûlant et d’épices orientales qui réchauffent les sens pour toute la journée.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Mixte",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/red-tobacco.jpg",
+      "image_local": "images\\red-tobacco.jpg",
+      "searchable_text": "RED TOBACCO - Boisé Épicé Intense - Un parfum incendiaire d’un magnétisme hors norme. Conçu autour d’une alliance enivrante de tabac cubain brûlant et d’épices orientales qui réchauffent les sens pour toute la journée. - Inspiré par Red Tobacco de Mancera - 3 500 FCFA"
+    },
+    "history": []
+  },
+  "aa9a1a498c683fed": {
+    "id": "aa9a1a498c683fed",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "f0eef7e154edd1cfb6c98acc3638d621fc7cdbb9d5f454640734caca913f9159",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
+    "status": "active",
+    "data": {
+      "name": "SÌ GIORGIO ARMANI",
+      "famille_olfactive": "Chypré Fruité",
+      "inspire_par": "Inspiré par Sì de Giorgio Armani",
+      "description": "Dites \"Sì\" (Oui) à la vie, à l’élégance et à l’audace. Un parfum moderne, voluptueux et intense qui réinterprète le chic italien traditionnel avec une touche de sensualité exquise.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Femme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png",
+      "image_local": "images\\si-giorgio-armani.png",
+      "searchable_text": "SÌ GIORGIO ARMANI - Chypré Fruité - Dites \"Sì\" (Oui) à la vie, à l’élégance et à l’audace. Un parfum moderne, voluptueux et intense qui réinterprète le chic italien traditionnel avec une touche de sensualité exquise. - Inspiré par Sì de Giorgio Armani - 3 500 FCFA"
+    },
+    "history": [
+      {
+        "date": "2026-08-11T12:17:27.186303+00:00",
+        "changes": {
+          "image_url": {
+            "avant": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpeg",
+            "apres": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png"
+          },
+          "image_local": {
+            "avant": null,
+            "apres": "images\\si-giorgio-armani.png"
+          }
+        }
+      }
+    ]
+  },
+  "e749e9a9c8893f34": {
+    "id": "e749e9a9c8893f34",
+    "source_url": "https://the-real-fragrances.vercel.app/",
+    "content_hash": "aff370a7de84395d8b4aa9acab0911192951c11f1acb7fcf0fe6f86342504e3c",
+    "first_seen": "2026-08-11T11:41:50.788122+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
+    "status": "active",
+    "data": {
+      "name": "STRONGER WITH YOU",
+      "famille_olfactive": "Aromatic Épicé Gourmand",
+      "inspire_par": "Inspiré par Stronger with You d’Emporio Armani",
+      "description": "Le parfum d’un amour moderne, magnétique et complice. Une fragrance chaleureuse, énergétique et séduisante qui s’exprime à travers des accords de châtaigne glacée et d’épices texturées.",
+      "price_raw": "3 500 FCFA",
+      "price_value": 3500.0,
+      "currency": "XAF",
+      "badge_genre": "Homme",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/stronger-with-you.jpg",
+      "image_local": "images\\stronger-with-you.jpg",
+      "searchable_text": "STRONGER WITH YOU - Aromatic Épicé Gourmand - Le parfum d’un amour moderne, magnétique et complice. Une fragrance chaleureuse, énergétique et séduisante qui s’exprime à travers des accords de châtaigne glacée et d’épices texturées. - Inspiré par Stronger with You d’Emporio Armani - 3 500 FCFA"
+    },
+    "history": []
+  }
+}
