@@ -245,6 +245,7 @@ def appeler_llm(nom: str, bio: str) -> Optional[dict]:
                 messages=messages,
                 temperature=0.4,
                 max_tokens=600,
+                reasoning_format="parsed",  # <-- AJOUT : évite que le raisonnement pollue le JSON de sortie
             )
             contenu = reponse.choices[0].message.content or ""
         except Exception as exc:  # noqa: BLE001
