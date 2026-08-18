@@ -70,6 +70,7 @@ from dataclasses import dataclass, asdict, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
+from dotenv import load_dotenv
 
 try:
     from groq import Groq
@@ -81,9 +82,13 @@ except ImportError as exc:  # pragma: no cover
     )
 
 # ── Chemins / configuration ────────────────────────────────────────
+
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_FILE = BASE_DIR / "data_transform" / "input" / "artistes.json"
-OUTPUT_FILE = BASE_DIR / "data_transform" / "output" / "artistes_enrichis.json"
+
+load_dotenv(BASE_DIR.parent / ".env")
+
+INPUT_FILE = BASE_DIR / "input" / "artistes.json"
+OUTPUT_FILE = BASE_DIR / "output" / "artistes_enrichis.json"
 
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
