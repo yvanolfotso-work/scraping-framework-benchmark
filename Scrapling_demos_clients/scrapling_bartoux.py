@@ -272,35 +272,132 @@ def get_artists() -> list[dict]:
 # 2. BIO REELLE (deux methodes en cascade, robuste)
 # ----------------------------------------------------------------------
 
+
 def extract_artist_bio(page) -> str | None:
-    # --- Methode 1 : selecteurs CSS precis, en cascade ---
-    paragraphs = page.css("div.The_Content section p::text").getall()
-    if not paragraphs:
-        paragraphs = page.css("section[itemprop='text'] p::text").getall()
-    if not paragraphs:
-        paragraphs = page.css("div.The_Content p::text").getall()
+    """
+    Récupère la bio réelle d'un artiste.
+    Plusieurs méthodes en cascade pour rester robuste face aux variations HTML.
+    """
 
-    cleaned = [clean_text(p) for p in paragraphs]
-    cleaned = [p for p in cleaned if p and len(p) > 20 and "cookie" not in p.lower()]
+    def _texts_from_selector(selector: str) -> list[str]:
+        """Retourne une liste de paragraphes propres depuis un sélecteur CSS."""
+        results = []
+        try:
+            elements = page.css(selector)
+            if not elements:
+                return []
+            for el in elements:
+                # 1) texte via ::text (tous les nœuds texte)
+                parts = el.css("::text").getall() if hasattr(el, "css") else []
+                if parts:
+                    t = clean_text(" ".join(parts))
+                else:
+                    # 2) fallback get_all_text / text
+                    raw = None
+                    if hasattr(el, "get_all_text"):
+                        raw = el.get_all_text()
+                    elif hasattr(el, "text"):
+                        raw = el.text
+                    t = clean_text(raw)
+                if t and len(t) > 25 and "cookie" not in t.lower():
+                    results.append(t)
+        except Exception as e:
+            log.debug(f"Sélecteur bio échoué ({selector}) : {e}")
+        return results
 
-    if cleaned:
-        return "\n\n".join(cleaned)
+    # --- Méthode 1 : sélecteurs CSS ciblés (du plus précis au plus large) ---
+    css_candidates = [
+        "div.The_Content section[itemprop='text'] p",
+        "div.The_Content section p",
+        "section[itemprop='text'] p",
+        "div.The_Content p",
+        ".The_Content p",
+    ]
+    for sel in css_candidates:
+        paragraphs = _texts_from_selector(sel)
+        if paragraphs:
+            bio = "\n\n".join(paragraphs)
+            if len(bio) > 60:
+                return bio
 
-    # --- Methode 2 (fallback) : texte brut de page, decoupe autour
-    #     du mot "Biographie", jusqu'au premier marqueur de fin connu.
-    full_text = page.get_all_text() or ""
+    # --- Méthode 2 : XPath (souvent plus fiable que CSS + ::text) ---
+    try:
+        xpath_paragraphs = page.xpath(
+            "//div[contains(@class,'The_Content')]//section[@itemprop='text']//p"
+            " | //div[contains(@class,'The_Content')]//p"
+            " | //section[@itemprop='text']//p"
+        )
+        cleaned = []
+        for node in xpath_paragraphs:
+            t = clean_text(node.get_all_text() if hasattr(node, "get_all_text") else node.xpath("string()").get())
+            if t and len(t) > 25 and "cookie" not in t.lower():
+                cleaned.append(t)
+        if cleaned:
+            bio = "\n\n".join(cleaned)
+            if len(bio) > 60:
+                return bio
+    except Exception as e:
+        log.debug(f"XPath bio échoué : {e}")
+
+    # --- Méthode 3 : texte brut de la page, découpe autour de "Biographie" ---
+    full_text = ""
+    try:
+        full_text = page.get_all_text() or ""
+    except Exception:
+        pass
+
     if "Biographie" in full_text:
         after = full_text.split("Biographie", 1)[1]
+        # On retire le nom de l'artiste s'il est juste après le titre
+        # (souvent "Biographie\nAL FRENO\nÀ l'issue...")
+        lines = [ln.strip() for ln in after.splitlines() if ln.strip()]
+        # saute les lignes très courtes (titre / nom)
+        start_idx = 0
+        for i, ln in enumerate(lines[:4]):
+            if len(ln) < 40 and not ln.endswith("."):
+                start_idx = i + 1
+            else:
+                break
+        after = "\n".join(lines[start_idx:])
+
         for marker in BIO_END_MARKERS:
             if marker in after:
                 after = after.split(marker, 1)[0]
                 break
+        # coupe aussi sur le formulaire / WhatsApp
+        for extra in ["Nom*", "Prénom*", "Contactez-nous sur WhatsApp", "Plus d'info sur cet artiste"]:
+            if extra in after:
+                after = after.split(extra, 1)[0]
         bio = clean_text(after)
-        if bio and len(bio) > 40:
+        if bio and len(bio) > 80:
             return bio
 
-    return None
+    # --- Méthode 4 : meta description (début de bio) ---
+    try:
+        meta = page.css('meta[name="description"]::attr(content)').get()
+        meta = clean_text(meta)
+        if meta and len(meta) > 80:
+            return meta
+    except Exception:
+        pass
 
+    # --- Méthode 5 : JSON-LD (schema.org) ---
+    try:
+        for script in page.css('script[type="application/ld+json"]::text').getall():
+            if not script:
+                continue
+            data = json.loads(script)
+            graph = data.get("@graph", [data] if isinstance(data, dict) else [])
+            for item in graph:
+                if not isinstance(item, dict):
+                    continue
+                desc = item.get("description")
+                if desc and len(str(desc)) > 80:
+                    return clean_text(desc)
+    except Exception:
+        pass
+
+    return None
 
 # ----------------------------------------------------------------------
 # 3. PAGE ARTISTE : bio + liste des liens d'oeuvres (une seule visite)
