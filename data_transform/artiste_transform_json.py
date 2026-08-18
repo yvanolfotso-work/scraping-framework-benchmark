@@ -90,7 +90,7 @@ load_dotenv(BASE_DIR.parent / ".env")
 INPUT_FILE = BASE_DIR / "input" / "artistes.json"
 OUTPUT_FILE = BASE_DIR / "output" / "artistes_enrichis.json"
 
-GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b") # llama-3.3-70b-versatile : est indisponible sur l'API gratuite Groq, mais fonctionne en local si tu as le modèle téléchargé
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
 MAX_TENTATIVES_LLM = 3
