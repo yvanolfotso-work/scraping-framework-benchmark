@@ -51,3 +51,29 @@
 2026-08-11 13:17:27,190 [INFO] Modifies (ce run) : 5
 2026-08-11 13:17:27,190 [INFO] Fichier          : catalogue_fragrances.json
 2026-08-11 13:17:27,190 [INFO] Images dans      : images/
+2026-08-13 11:15:18,970 [INFO] Ouverture navigateur : https://the-real-fragrances.vercel.app/
+2026-08-13 11:15:59,440 [INFO] Fetched (200) <GET https://the-real-fragrances.vercel.app/> (referer: https://www.google.com/)
+2026-08-13 11:16:04,657 [INFO] Nombre articles trouves (bruts) : 19
+2026-08-13 11:16:19,027 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/bois-dargent.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:33,988 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:36,112 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/invictus.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:36,810 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/le-male.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:37,500 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:38,412 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/presidential-oud.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:39,033 [WARNING] Echec telechargement image (https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpg) : HTTP Error 404: Not Found
+2026-08-13 11:16:39,036 [INFO] Produits valides extraits : 19
+2026-08-13 11:16:39,040 [INFO] Backup cree : backups\catalogue_20260813_111639.json
+2026-08-13 11:16:39,040 [INFO] [CHANGE]    BOIS D’ARGENT -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/bois-dargent.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/bois-dargent.jpg'}, 'image_local': {'avant': 'images\\bois-dargent.png', 'apres': None}}
+2026-08-13 11:16:39,040 [INFO] [CHANGE]    COCO MADEMOISELLE -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.jpg'}, 'image_local': {'avant': 'images\\coco-mademoiselle.png', 'apres': None}}
+2026-08-13 11:16:39,041 [INFO] [CHANGE]    INVICTUS -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/invictus.JPEG', 'apres': 'https://the-real-fragrances.vercel.app/parfums/invictus.jpg'}}
+2026-08-13 11:16:39,041 [INFO] [CHANGE]    LE MÂLE -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/le-male.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/le-male.jpg'}, 'image_local': {'avant': 'images\\le-male.png', 'apres': None}}
+2026-08-13 11:16:39,041 [INFO] [CHANGE]    LIBRE YSL -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG', 'apres': 'https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpg'}}
+2026-08-13 11:16:39,042 [INFO] [CHANGE]    PRÉSIDENTIAL OUD -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/presidential-oud.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/presidential-oud.jpg'}, 'image_local': {'avant': 'images\\presidential-oud.png', 'apres': None}}
+2026-08-13 11:16:39,042 [INFO] [CHANGE]    SÌ GIORGIO ARMANI -> {'image_url': {'avant': 'https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png', 'apres': 'https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpg'}, 'image_local': {'avant': 'images\\si-giorgio-armani.png', 'apres': None}}
+2026-08-13 11:16:39,045 [INFO] ===== RESUME =====
+2026-08-13 11:16:39,045 [INFO] Total catalogue : 19
+2026-08-13 11:16:39,045 [INFO] Actifs          : 19
+2026-08-13 11:16:39,046 [INFO] Orphelins       : 0
+2026-08-13 11:16:39,046 [INFO] Modifies (ce run) : 8
+2026-08-13 11:16:39,046 [INFO] Fichier          : catalogue_fragrances.json
+2026-08-13 11:16:39,046 [INFO] Images dans      : images/

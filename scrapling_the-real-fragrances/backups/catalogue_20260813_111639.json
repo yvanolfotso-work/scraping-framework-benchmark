@@ -4,7 +4,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "502df206d44b415aa58c57afe5d679b1cbd996034f64195df7a8c58660c472aa",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -27,7 +27,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "9f9fd214f062ccdf741a8e602574c45bf2f7efd5f474bb36329ebfc74ead380d",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -50,7 +50,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "59e7035b8bd3246feb8e732ce7d032057e8354dd8c039e5372bf0f5ff49974be",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T12:17:27.186303+00:00",
     "status": "active",
     "data": {
@@ -85,10 +85,10 @@
   "5b5aedfef4756870": {
     "id": "5b5aedfef4756870",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "283c967b5aa0701166410a6e326f662f8ad28c137604bf6026d5db822d840ef2",
+    "content_hash": "963991656f8d2f7d78462b08cfef182eda12bc027e7b6aaf7ff9f18768148b97",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
       "name": "BOIS D’ARGENT",
@@ -99,33 +99,19 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Mixte",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/bois-dargent.jpg",
-      "image_local": null,
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/bois-dargent.png",
+      "image_local": "images\\bois-dargent.png",
       "searchable_text": "BOIS D’ARGENT - Ambré Boisé Poudré - Une icône olfactive mystique d’un raffinement ultime. Ce parfum mixte haut de gamme joue sur le contraste raffiné d’une fleur d’iris poudrée et de l’encens mystique réchauffé de miel. - Inspiré par Bois d’Argent de Dior - 3 500 FCFA"
     },
-    "history": [
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/bois-dargent.png",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/bois-dargent.jpg"
-          },
-          "image_local": {
-            "avant": "images\\bois-dargent.png",
-            "apres": null
-          }
-        }
-      }
-    ]
+    "history": []
   },
   "bb54fc1fdb2bfeef": {
     "id": "bb54fc1fdb2bfeef",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "dceed243054ecd9e2cdffdf64a9e8db23fc4190a18253726c27e98cb1824df93",
+    "content_hash": "4aaafce231202b4083afa2abb9a0b7d58a359a55c8a4124f0316600a66af066f",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
       "name": "COCO MADEMOISELLE",
@@ -136,32 +122,18 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Femme",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.jpg",
-      "image_local": null,
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.png",
+      "image_local": "images\\coco-mademoiselle.png",
       "searchable_text": "COCO MADEMOISELLE - Ambré Floral - L’essence d’une femme libre et audacieuse. Un sillage oriental féminin au caractère affirmé et d’une fraîcheur étonnante, symbole absolu d’élégance française. - Inspiré par Coco Mademoiselle de Chanel - 3 500 FCFA"
     },
-    "history": [
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.png",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/coco-mademoiselle.jpg"
-          },
-          "image_local": {
-            "avant": "images\\coco-mademoiselle.png",
-            "apres": null
-          }
-        }
-      }
-    ]
+    "history": []
   },
   "6ddd582df8922f51": {
     "id": "6ddd582df8922f51",
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "7185585f00e5c366a9d3f0f8995bbcdb8c06416715de8abaf235c927c4b4698e",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -184,7 +156,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "d82bf1a12cd2aed125a003a5077920c9f81553591fd3fc80cc4e51b0309011a9",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -205,10 +177,10 @@
   "c1fa5ab86c6c5ac7": {
     "id": "c1fa5ab86c6c5ac7",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "a005df32b353e04bbb802e62aac9177cec051f2456063de46087b14ff700993b",
+    "content_hash": "06b8b29f18759bea3ede9831842606fe0a7b2d40e37b6cf065239d814db9831b",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
     "status": "active",
     "data": {
       "name": "INVICTUS",
@@ -219,7 +191,7 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Homme",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/invictus.jpg",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/invictus.JPEG",
       "image_local": null,
       "searchable_text": "INVICTUS - Boisé Aquatique - Une fragrance fraîche, héroïque et boisée, conçue pour l’homme victorieux. Un choc olfactif sensuel entre une fraîcheur marine saisissante et la chaleur magnétique du bois de gaïac. - Inspiré par Invictus de Paco Rabanne - 3 500 FCFA"
     },
@@ -232,15 +204,6 @@
             "apres": "https://the-real-fragrances.vercel.app/parfums/invictus.JPEG"
           }
         }
-      },
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/invictus.JPEG",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/invictus.jpg"
-          }
-        }
       }
     ]
   },
@@ -249,7 +212,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "73ef95bb98767c3a2e08ae6dc6bbbbc3ca7fb8b5ffc13f9b1dfca1bb3e10f411",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -272,7 +235,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "1a76a9dca5c106c2299e5d41755574c0cad4f2e63290112f1c65576f4eb28fa6",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -293,10 +256,10 @@
   "a8e21e9c1fea7ffe": {
     "id": "a8e21e9c1fea7ffe",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "ffa03bb7ec55f972e6993714c73c5182a3d0c24aade63ad3dc6acf450ce420a6",
+    "content_hash": "b508bda0fd5d6228e9b234840a27769392fa6980cd65232296919a6c7071b665",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
     "status": "active",
     "data": {
       "name": "LE MÂLE",
@@ -307,8 +270,8 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Homme",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/le-male.jpg",
-      "image_local": null,
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/le-male.png",
+      "image_local": "images\\le-male.png",
       "searchable_text": "LE MÂLE - Oriental Fougère - Aussi viril que sensible, ce sillage revisite la lavande traditionnelle avec sensualité et douceur. Une vanille réconfortante apporte une puissance magnétique irrésistible. - Inspiré par Le Mâle de Jean Paul Gaultier - 3 500 FCFA"
     },
     "history": [
@@ -324,29 +287,16 @@
             "apres": "images\\le-male.png"
           }
         }
-      },
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/le-male.png",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/le-male.jpg"
-          },
-          "image_local": {
-            "avant": "images\\le-male.png",
-            "apres": null
-          }
-        }
       }
     ]
   },
   "3de2f704f5e59f3f": {
     "id": "3de2f704f5e59f3f",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "6b51aae806392de401c28743a90d1764dc9516ad01ddab8d055c0840968e7cb5",
+    "content_hash": "fddac780250bddd05bd446e3edbbf1c51a783d0646f5e9065f4ee59f0cc071ab",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
     "status": "active",
     "data": {
       "name": "LIBRE YSL",
@@ -357,7 +307,7 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Femme",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpg",
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG",
       "image_local": null,
       "searchable_text": "LIBRE YSL - Ambré Fougère Féminin - Le parfum de la liberté sans compromis. L’élégance d’une lavande de France historiquement masculine est sublimée par la sensualité torride de la fleur d’oranger du Maroc dans un sillage haute couture. - Inspiré par Libre d’Yves Saint Laurent - 3 500 FCFA"
     },
@@ -370,15 +320,6 @@
             "apres": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG"
           }
         }
-      },
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.PNG",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/libre-ysl.jpg"
-          }
-        }
       }
     ]
   },
@@ -387,7 +328,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "2d4d42ccf2dbdb6718bcacfacf5f2e467b7bd5504018a7e2775ecb1161c4ff77",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -410,7 +351,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "d58628dd68325c315b571886264e7caf9d5b333251d6e101df478eaad3d40e48",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -433,7 +374,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "cca94b28ef8e63b265b388e10116c0d3884ba593e0fad6c256ab60b382efe834",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -454,10 +395,10 @@
   "54d9abece8168972": {
     "id": "54d9abece8168972",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "6f321c6a6ae6ce152d477b52f4f01fe46649e50e6735f4ede89ca2313a585378",
+    "content_hash": "1f80ed483f13c4c1489b601b5502ce74b750f6c71e6a10ef2baf3ed7cb27fdbc",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
       "name": "PRÉSIDENTIAL OUD",
@@ -468,32 +409,18 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Mixte",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/presidential-oud.jpg",
-      "image_local": null,
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/presidential-oud.png",
+      "image_local": "images\\presidential-oud.png",
       "searchable_text": "PRÉSIDENTIAL OUD - Ambré Boisé Royal - Une essence majestueuse synonyme de prestige et d’autorité. Conçue pour ceux qui imposent leur leadership naturel à travers un sillage boisé impérial enveloppé de fumées résineuses d’exception. - Inspiré des plus grandes essences royales d’Oud - 3 500 FCFA"
     },
-    "history": [
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/presidential-oud.png",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/presidential-oud.jpg"
-          },
-          "image_local": {
-            "avant": "images\\presidential-oud.png",
-            "apres": null
-          }
-        }
-      }
-    ]
+    "history": []
   },
   "9578665d72434f9b": {
     "id": "9578665d72434f9b",
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "ec2b9a1df1a4573355a2a5d227d466f43b2a3bd75f0f8f009b3817f370898476",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
@@ -514,10 +441,10 @@
   "aa9a1a498c683fed": {
     "id": "aa9a1a498c683fed",
     "source_url": "https://the-real-fragrances.vercel.app/",
-    "content_hash": "292f2053d1ae1049790d5527b7e5f6af0bb5d8f492eed54d160127261a14bdc3",
+    "content_hash": "f0eef7e154edd1cfb6c98acc3638d621fc7cdbb9d5f454640734caca913f9159",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
-    "last_changed": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
+    "last_changed": "2026-08-11T12:17:27.186303+00:00",
     "status": "active",
     "data": {
       "name": "SÌ GIORGIO ARMANI",
@@ -528,8 +455,8 @@
       "price_value": 3500.0,
       "currency": "XAF",
       "badge_genre": "Femme",
-      "image_url": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpg",
-      "image_local": null,
+      "image_url": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png",
+      "image_local": "images\\si-giorgio-armani.png",
       "searchable_text": "SÌ GIORGIO ARMANI - Chypré Fruité - Dites \"Sì\" (Oui) à la vie, à l’élégance et à l’audace. Un parfum moderne, voluptueux et intense qui réinterprète le chic italien traditionnel avec une touche de sensualité exquise. - Inspiré par Sì de Giorgio Armani - 3 500 FCFA"
     },
     "history": [
@@ -545,19 +472,6 @@
             "apres": "images\\si-giorgio-armani.png"
           }
         }
-      },
-      {
-        "date": "2026-08-13T10:16:39.040486+00:00",
-        "changes": {
-          "image_url": {
-            "avant": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.png",
-            "apres": "https://the-real-fragrances.vercel.app/parfums/si-giorgio-armani.jpg"
-          },
-          "image_local": {
-            "avant": "images\\si-giorgio-armani.png",
-            "apres": null
-          }
-        }
       }
     ]
   },
@@ -566,7 +480,7 @@
     "source_url": "https://the-real-fragrances.vercel.app/",
     "content_hash": "aff370a7de84395d8b4aa9acab0911192951c11f1acb7fcf0fe6f86342504e3c",
     "first_seen": "2026-08-11T11:41:50.788122+00:00",
-    "last_checked": "2026-08-13T10:16:39.040486+00:00",
+    "last_checked": "2026-08-11T12:17:27.186303+00:00",
     "last_changed": "2026-08-11T11:41:50.788122+00:00",
     "status": "active",
     "data": {
