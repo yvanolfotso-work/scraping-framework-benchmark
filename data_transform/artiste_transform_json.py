@@ -244,7 +244,7 @@ def appeler_llm(nom: str, bio: str) -> Optional[dict]:
                 model=GROQ_MODEL,
                 messages=messages,
                 temperature=0.4,
-                max_tokens=600,
+                max_tokens=2000,  # augmenté : le raisonnement interne consomme des tokens avant le JSON final
                 reasoning_format="parsed",  # <-- AJOUT : évite que le raisonnement pollue le JSON de sortie
             )
             contenu = reponse.choices[0].message.content or ""
