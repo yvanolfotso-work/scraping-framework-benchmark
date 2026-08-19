@@ -1,0 +1,265 @@
+nohup: ignoring input
+21:42:34 [INFO] 57 artistes lus depuis /home/figurative/scraping-framework-benchmark/data_transform/input/artistes.json
+21:42:34 [INFO] [1/57] AL FRENO
+21:42:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:42:40 [INFO] [2/57] CHRIS CAROLINA
+21:42:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:42:47 [INFO] [3/57] CHRIS RILEY
+21:42:50 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:42:55 [INFO] [4/57] DAVID UESSEM
+21:42:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:02 [INFO] [5/57] DIRK VERDOORN
+21:43:03 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:08 [INFO] [6/57] ERIC ALFARO
+21:43:11 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:16 [INFO] [7/57] FRANÇOIS D’IZARNY
+21:43:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:23 [INFO] [8/57] GABRIEL MORENO
+21:43:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:27 [WARNING] JSON invalide pour 'GABRIEL MORENO' (tentative 1/3)
+21:43:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:43:27 [INFO] Retrying request to /openai/v1/chat/completions in 12.000000 seconds
+21:43:41 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:46 [INFO] [9/57] Gianluca Corona
+21:43:48 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:43:53 [INFO] [10/57] HARDING MEYER
+21:43:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:43:53 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:43:59 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:44:04 [INFO] [11/57] JOSÉ LUIS CEÑA
+21:44:04 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:44:04 [INFO] Retrying request to /openai/v1/chat/completions in 11.000000 seconds
+21:44:19 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:44:24 [INFO] [12/57] KADIR AKYOL
+21:44:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:44:24 [INFO] Retrying request to /openai/v1/chat/completions in 7.000000 seconds
+21:44:31 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:44:31 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:44:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:44:40 [INFO] [13/57] KIKO
+21:44:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:44:47 [INFO] [14/57] KOZO
+21:44:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:44:47 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:44:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:44:58 [INFO] [15/57] LIS SAM
+21:44:58 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:44:58 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:45:01 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:06 [INFO] [16/57] MARC PELTZER
+21:45:06 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:45:06 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:45:09 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:14 [INFO] [17/57] MILES HYMAN
+21:45:16 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:21 [INFO] [18/57] MÓNICA FERNÁNDEZ
+21:45:21 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:45:21 [INFO] Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+21:45:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:34 [INFO] [19/57] PASQUALE DI FAZIO
+21:45:34 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:45:34 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:45:37 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:42 [INFO] [20/57] PIERRE-YVES RUSSO
+21:45:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:45:42 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:45:45 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:45:50 [INFO] [21/57] RAFFAELE MINOTTO
+21:45:50 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:45:50 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:45:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:02 [INFO] [22/57] ROBERTA CONI
+21:46:02 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:46:02 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:46:08 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:13 [INFO] [23/57] SERGIO MARTINEZ
+21:46:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:18 [WARNING] JSON invalide pour 'SERGIO MARTINEZ' (tentative 1/3)
+21:46:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:46:18 [INFO] Retrying request to /openai/v1/chat/completions in 13.000000 seconds
+21:46:33 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:38 [INFO] [24/57] ZHUANG HONG-YI
+21:46:40 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:45 [INFO] [25/57] ANDREA ROGGI
+21:46:45 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:46:45 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:46:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:46:57 [INFO] [26/57] ANTHONY THEAKSTON
+21:46:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:46:57 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:47:00 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:47:00 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:47:03 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:47:08 [INFO] [27/57] BRUNO CATALANO
+21:47:08 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:47:08 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:47:14 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:47:14 [WARNING] JSON invalide pour 'BRUNO CATALANO' (tentative 1/3)
+21:47:14 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:47:14 [INFO] Retrying request to /openai/v1/chat/completions in 16.000000 seconds
+21:47:33 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:47:38 [INFO] [28/57] CAROLE FEUERMAN
+21:47:38 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:47:38 [INFO] Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+21:47:48 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:47:53 [INFO] [29/57] CODERCH & MALAVIA
+21:47:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:47:53 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:47:58 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:48:03 [INFO] [30/57] ÉTIENNE
+21:48:03 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:03 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:48:12 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:48:12 [WARNING] JSON invalide pour 'ÉTIENNE' (tentative 1/3)
+21:48:12 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:12 [INFO] Retrying request to /openai/v1/chat/completions in 11.000000 seconds
+21:48:23 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:23 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:48:25 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:25 [WARNING] Appel Groq échoué pour 'ÉTIENNE' (tentative 2/3) : Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kyhbdqnje49tc0mdvrbsgb3m` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5435, Requested 2690. Please try again in 937.5ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+21:48:30 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:48:35 [INFO] [31/57] GAELLE WEISSBERG
+21:48:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:35 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:48:38 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:48:43 [INFO] [32/57] JEAN MARTIN
+21:48:46 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:48:51 [INFO] [33/57] JÜRGEN LINGL
+21:48:51 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:48:51 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:48:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:02 [INFO] [34/57] KIKO
+21:49:02 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:02 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:49:08 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:13 [INFO] [35/57] LORENZO QUINN
+21:49:13 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:13 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:49:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:18 [WARNING] JSON invalide pour 'LORENZO QUINN' (tentative 1/3)
+21:49:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:18 [INFO] Retrying request to /openai/v1/chat/completions in 14.000000 seconds
+21:49:34 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:39 [INFO] [36/57] LOTHAR
+21:49:39 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:39 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:49:41 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:46 [INFO] [37/57] LUO LI RONG
+21:49:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:47 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:49:51 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:49:56 [INFO] [38/57] LYDIA KALIS
+21:49:56 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:49:56 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:50:00 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:50:05 [INFO] [39/57] MARIE-PAULE DEVILLE CHABROLLE
+21:50:05 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:05 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:50:10 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:50:15 [INFO] [40/57] MICHEL BASSOMPIERRE
+21:50:15 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:15 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:50:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:18 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:50:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:50:24 [WARNING] JSON invalide pour 'MICHEL BASSOMPIERRE' (tentative 1/3)
+21:50:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:24 [INFO] Retrying request to /openai/v1/chat/completions in 13.000000 seconds
+21:50:37 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:37 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:50:40 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:50:45 [INFO] [41/57] OLIVIER BERTRAND
+21:50:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:50:52 [INFO] [42/57] PAUL BECKRICH
+21:50:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:50:52 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:50:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:02 [INFO] [43/57] Philippe Chazot
+21:51:02 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:51:02 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:51:09 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:09 [WARNING] JSON invalide pour 'Philippe Chazot' (tentative 1/3)
+21:51:09 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:51:09 [INFO] Retrying request to /openai/v1/chat/completions in 14.000000 seconds
+21:51:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:29 [INFO] [44/57] SALVADOR DALI
+21:51:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:51:29 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:51:37 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:42 [INFO] [45/57] VAN DEN BERGHE
+21:51:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:51:42 [INFO] Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+21:51:50 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:55 [INFO] [46/57] VITTORIO IAVAZZO
+21:51:55 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:51:55 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:52:01 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:06 [INFO] [47/57] ALEX BERNSTEIN
+21:52:06 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:06 [INFO] Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+21:52:14 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:14 [WARNING] JSON invalide pour 'ALEX BERNSTEIN' (tentative 1/3)
+21:52:14 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:14 [INFO] Retrying request to /openai/v1/chat/completions in 15.000000 seconds
+21:52:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:29 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:52:34 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:39 [INFO] [48/57] AMARIST
+21:52:39 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:39 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:52:44 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:49 [INFO] [49/57] ANNA MASTERS
+21:52:49 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:49 [INFO] Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+21:52:56 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:56 [WARNING] JSON invalide pour 'ANNA MASTERS' (tentative 1/3)
+21:52:56 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:52:56 [INFO] Retrying request to /openai/v1/chat/completions in 14.000000 seconds
+21:53:15 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:53:15 [WARNING] JSON invalide pour 'ANNA MASTERS' (tentative 2/3)
+21:53:15 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:53:15 [INFO] Retrying request to /openai/v1/chat/completions in 13.000000 seconds
+21:53:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:53:34 [INFO] [50/57] ANNALÙ
+21:53:36 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:53:41 [INFO] [51/57] ANTOINE DUFILHO
+21:53:41 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:53:41 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:53:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:53:47 [WARNING] JSON invalide pour 'ANTOINE DUFILHO' (tentative 1/3)
+21:53:48 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:53:48 [INFO] Retrying request to /openai/v1/chat/completions in 14.000000 seconds
+21:54:04 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:54:09 [INFO] [52/57] CHRISTOPHE GAIGNON
+21:54:09 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:54:09 [INFO] Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+21:54:20 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:54:20 [WARNING] JSON invalide pour 'CHRISTOPHE GAIGNON' (tentative 1/3)
+21:54:20 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:54:20 [INFO] Retrying request to /openai/v1/chat/completions in 12.000000 seconds
+21:54:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:54:40 [INFO] [53/57] CORINE VAN VOORBERGEN
+21:54:40 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:54:40 [INFO] Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+21:54:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:54:52 [INFO] [54/57] Larisa Safaryan
+21:54:54 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:54:59 [INFO] [55/57] NAT BOWEN
+21:54:59 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:54:59 [INFO] Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+21:55:03 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:55:08 [INFO] [56/57] NOART
+21:55:08 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:55:08 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:55:11 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:55:16 [INFO] [57/57] STALLMAN
+21:55:17 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+21:55:17 [INFO] Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+21:55:20 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+21:55:25 [INFO] ✅ Terminé.
+21:55:25 [INFO]    57 artistes traités par le LLM cette exécution
+21:55:25 [INFO]    57 enrichissements LLM réussis
+21:55:25 [INFO]    0 enrichissements LLM en échec (valeurs de secours utilisées)
+21:55:25 [INFO]    0 artistes ignorés car déjà enrichis (cache)
+21:55:25 [INFO]    0 artistes sans bio source
+21:55:25 [INFO] 📄 Résultat écrit dans /home/figurative/scraping-framework-benchmark/data_transform/output/artistes_enrichis.json
