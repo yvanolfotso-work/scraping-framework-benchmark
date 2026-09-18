@@ -16,10 +16,13 @@ from pathlib import Path
 # CHEMINS
 # ----------------------------------------------------------------------
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent      # dossier data_augmentation/
+RACINE_PROJET = BASE_DIR.parent                  # dossier data_augmentation_projet/
 
-SCRAPING_DIR = Path(
-    os.getenv("SCRAPING_DIR", BASE_DIR.parent)
+_scraping_dir_brut = Path(os.getenv("SCRAPING_DIR", "input_base"))
+SCRAPING_DIR = (
+    _scraping_dir_brut if _scraping_dir_brut.is_absolute()
+    else RACINE_PROJET / _scraping_dir_brut
 ).resolve()
 
 ARTISTES_JSON = SCRAPING_DIR / "artistes.json"
@@ -40,27 +43,14 @@ LOG_FILE = OUT_DIR / "augmentation.log"
 # A1 — EXTRACTION DES MOTS-CLES CANDIDATS
 # ----------------------------------------------------------------------
 
-# Champs STRUCTURES exploites tels quels (valeur = terme candidat direct).
-# Cote artistes : name et category sont des donnees d'origine, on les garde.
-# Cote catalogue : aucun champ direct — title / artist_name / artist_category
-# / medium sont reconstruits par le scraper, donc non fiables. L'info
-# catalogue est reconstruite depuis l'URL produit (voir A1_CHAMP_URL_CATALOGUE).
 A1_CHAMPS_STRUCTURES = [
     ("artistes", "name", "artiste"),
     ("artistes", "category", "categorie"),
 ]
 
-# Champs TEXTE LIBRE d'ou l'on extrait des n-grammes.
-# Seule la bio artiste est un texte reellement redige et recupere chez
-# Bartoux -> unique source de n-grammes du pipeline.
 A1_CHAMPS_TEXTE = [
     ("artistes", "bio"),
 ]
-
-# UNIQUE champ utilise pour les produits du catalogue.
-# "url" est la source canonique : elle contient a la fois le dossier
-# artiste (/artistes/<slug>/) et le slug complet de l'oeuvre. Les champs
-# "image" et "local_image" sont derives par un autre script, donc ecartes.
 A1_CHAMP_URL_CATALOGUE = "url"
 
 # Segments de chemin marquant le debut d'un bloc /<marqueur>/<artiste>/<oeuvre>/.
@@ -162,8 +152,8 @@ A2_TYPES_INCLUS = {"artiste", "categorie", "technique", "concept"}
 
 # A3_PROVIDERS = ["wikipedia", "google_cse"]
 A3_PROVIDERS = ["wikipedia"]
-A3_MAX_RESULTATS_PAR_REQUETE = 5
 A3_ECHECS_FATALS_MAX = 3
+A3_MAX_RESULTATS_PAR_REQUETE = 5
 A3_LANG = "fr"
 A3_DELAI_ENTRE_REQUETES = 1.5
 A3_TIMEOUT = 20
