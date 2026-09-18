@@ -1,41 +1,45 @@
 # -*- coding: utf-8 -*-
 """
 VERIFICATION — controle d'integrite du flow d'augmentation
-==========================================================
 
 Ce module ne produit pas de donnee : il CONTROLE celles deja produites.
 C'est la piece a montrer pour repondre a la question "comment sait-on
 que ces donnees viennent vraiment du net et pas d'un LLM ?".
 
-Cinq controles :
+Six controles :
 
   C1. Chainage des empreintes
       L'empreinte A1 citee par A2, et l'empreinte A2 citee par A3,
-      correspondent bien aux fichiers presents. Si quelqu'un modifie
-      motscles_candidats.json a la main, le chainage casse.
+      correspondent bien aux fichiers presents.
 
   C2. Ancrage des termes dans le corpus
-      Chaque terme de A1 est re-cherche dans artistes.json /
-      catalogue.json. Un terme introuvable = terme invente = ECHEC.
+      - termes copies directs (name/category/bio) -> doivent apparaitre
+        tels quels (normalises) dans le texte brut du corpus.
+      - termes reconstruits depuis catalogue.url (artiste/titre_oeuvre/
+        dimension) -> l'URL source citee en "origine" est reparsee avec
+        EXACTEMENT le meme parseur que A1 ; le terme doit reapparaitre
+        dans le resultat. Une simple sous-chaine ne suffit pas ici :
+        A1 transforme le texte (tirets retires, dimension reformatee),
+        donc l'URL brute ne contient plus le terme mot pour mot.
 
   C3. Ancrage des requetes
-      Chaque requete de A2 doit etre reconstructible exactement par
-      gabarit + terme. Une requete non reconstructible = texte libre
-      injecte = ECHEC.
+      Chaque requete de A2 doit etre reconstructible par gabarit + terme.
 
   C4. Preuve HTTP des resultats
-      Chaque resultat de A3 porte un http_status 200, un horodatage,
-      et un fichier brut dont le sha256 est recalcule et compare.
+      Chaque resultat de A3 porte un http_status 200 et un fichier brut
+      dont le sha256 est recalcule et compare.
 
   C5. Ancrage des URL
-      Chaque resultat cite une URL / un titre present dans la reponse
-      brute correspondante. Une URL absente du brut = fabriquee = ECHEC.
+      Chaque resultat cite une URL/titre present dans la reponse brute.
+
+  C6. Aucun LLM declare dans l'etape de collecte.
 """
 
 import json
 from pathlib import Path
 
 from . import config
+from . import a1_extraction
 from .common import (
     get_logger, lire_json, sha256_texte, sha256_objet,
     cle_normalisee, nettoyer, iter_enregistrements,
@@ -94,7 +98,7 @@ def c1_chainage(rapport: Rapport, a1, a2, a3):
 
 
 # ----------------------------------------------------------------------
-# C2 — chaque terme existe reellement dans le corpus
+# C2 — chaque terme est reproductible depuis le corpus
 # ----------------------------------------------------------------------
 
 def index_corpus() -> str:
@@ -109,14 +113,47 @@ def index_corpus() -> str:
     return " || ".join(morceaux)
 
 
+def _vient_de_url_catalogue(terme: dict) -> bool:
+    """Vrai si ce terme A1 a ete reconstruit depuis catalogue.url (voir A1_CHAMP_URL_CATALOGUE)."""
+    champ_url = config.A1_CHAMP_URL_CATALOGUE
+    return any(
+        occ.get("fichier") == "catalogue" and occ.get("champ") == champ_url
+        for occ in terme.get("origine", {}).get("occurrences", [])
+    )
+
+
+def _reproductible_depuis_url(terme: dict, enregistrements_catalogue: dict) -> bool:
+    """Reparse les URL citees en 'origine' et verifie que le terme en ressort encore."""
+    champ_url = config.A1_CHAMP_URL_CATALOGUE
+    for occ in terme.get("origine", {}).get("occurrences", []):
+        if occ.get("fichier") != "catalogue" or occ.get("champ") != champ_url:
+            continue
+        data = enregistrements_catalogue.get(occ.get("record_id"))
+        if not data:
+            continue
+        infos = a1_extraction.parser_url_produit(data.get(champ_url) or "")
+        if terme["cle"] in {cle_normalisee(v) for v in infos.values() if v}:
+            return True
+    return False
+
+
 def c2_termes_ancres(rapport: Rapport, a1):
     corpus = index_corpus()
-    manquants = [t["terme"] for t in a1.get("termes", [])
-                 if t["cle"] not in corpus]
+    catalogue = lire_json(config.CATALOGUE_JSON)
+    enregistrements = dict(iter_enregistrements(catalogue))
+
+    manquants = []
+    for t in a1.get("termes", []):
+        if t["cle"] in corpus:
+            continue
+        if _vient_de_url_catalogue(t) and _reproductible_depuis_url(t, enregistrements):
+            continue
+        manquants.append(t["terme"])
+
     ok = not manquants
     rapport.ajouter(
-        "C2", "Tous les termes de A1 existent dans le corpus scrape", ok,
-        "" if ok else f"{len(manquants)} terme(s) introuvable(s) : {manquants[:5]}"
+        "C2", "Tous les termes de A1 sont reproductibles depuis le corpus scrape", ok,
+        "" if ok else f"{len(manquants)} terme(s) non reproductible(s) : {manquants[:5]}"
     )
 
 
@@ -143,7 +180,7 @@ def c3_requetes_ancrees(rapport: Rapport, a1, a2):
 
 
 # ----------------------------------------------------------------------
-# C4 / C5 — preuve HTTP et ancrage des URL
+# C4 / C5 / C6 — preuve HTTP, ancrage des URL, absence de LLM
 # ----------------------------------------------------------------------
 
 def c4_c5_preuves(rapport: Rapport, a3):
@@ -188,7 +225,6 @@ def c4_c5_preuves(rapport: Rapport, a3):
             hash_casses.append(chemin_rel)
             continue
 
-        # C5 : le titre ou l'URL doit apparaitre dans la reponse brute
         titre = r.get("titre") or ""
         url = r.get("url") or ""
         dernier_segment = url.rstrip("/").split("/")[-1]
@@ -214,7 +250,7 @@ def c4_c5_preuves(rapport: Rapport, a3):
     )
 
     rapport.ajouter(
-        "C6", "Aucun LLM declare dans l'etape de collecte", 
+        "C6", "Aucun LLM declare dans l'etape de collecte",
         a3.get("meta", {}).get("llm_utilise") is False,
         "meta.llm_utilise = False"
     )

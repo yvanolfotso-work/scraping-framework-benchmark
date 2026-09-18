@@ -1,5 +1,7 @@
 # Flow d'augmentation du corpus - étapes A1 → A3
 
+![Flow A1 à A5](docs/flow.png)
+
 Projet **séparé** du scraper. Il ne modifie jamais `artistes.json` ni
 `catalogue.json` : il les lit seulement, et écrit tout dans `out/`.
 
@@ -72,16 +74,24 @@ de configurer Google.
 
 ### A1 — extraction des mots-clés candidats
 
-Deux familles de termes, extraites des deux fichiers du scraper :
+Seules les données **originales** du corpus sont exploitées — rien qui
+soit reconstruit ou dupliqué par le scraper :
 
 | Famille | Provenance | Filtrage |
 |---|---|---|
-| **structurés** | `name`, `category`, `title`, `medium` | gardés même vus une seule fois |
-| **texte libre** | `bio`, `description` | n-grammes 1→3, mots vides retirés, fréquence ≥ `A1_FREQ_MIN` |
+| **structurés (artistes)** | `artistes.name`, `artistes.category` | gardés même vus une seule fois |
+| **structurés (catalogue)** | `catalogue.url`, parsée en artiste / titre_oeuvre / dimension | idem, jamais de champ direct (`title`/`artist_name`/`medium` non fiables) |
+| **texte libre** | `artistes.bio` | n-grammes 1→3, mots vides retirés, fréquence ≥ `A1_FREQ_MIN` |
+
+`catalogue.url` est la source canonique côté produit : elle porte à la
+fois le dossier artiste (`/artistes/<slug>/`) et le slug complet de
+l'œuvre, y compris la dimension (`...-120-x-120-cm/`). Les champs
+`image` et `local_image` ne sont pas utilisés (le second est parfois
+tronqué par le scraper).
 
 Un terme vu dans un champ structuré reste structuré même s'il apparaît
-aussi dans une description — sinon un titre d'œuvre cité dans un texte
-basculait en « concept » et se faisait éliminer par le seuil de fréquence.
+aussi dans la bio — sinon un titre d'œuvre cité dans un texte basculait
+en « concept » et se faisait éliminer par le seuil de fréquence.
 
 Chaque terme sort avec son type, sa fréquence, ses variantes d'écriture,
 et la **liste des enregistrements et champs d'où il vient**.
@@ -90,24 +100,42 @@ et la **liste des enregistrements et champs d'où il vient**.
 
 **Aucun LLM.** Une requête = un gabarit (`A2_TEMPLATES`) + un terme de A1.
 Les gabarits sont choisis selon le type du terme, donc on ne pose pas une
-question de biographie à un nom de technique.
+question de biographie à une dimension d'œuvre.
 
 Chaque requête garde le `terme_id` et le `template` exact utilisés, donc
 elle est reconstructible — et impossible à faire porter sur un sujet
-absent du corpus.
+absent du corpus. Les gabarits sont validés au démarrage (un gabarit
+sans `{terme}` fait échouer le run plutôt que de produire silencieusement
+la même requête pour tous les termes).
 
 ### A3 — recherche externe
 
 **Aucun LLM non plus.** Deux fournisseurs, tous deux via API officielle
 (pas de scraping des pages de résultats) :
 
-- **Wikipédia** — API MediaWiki publique, sans clé.
-- **Google** — Programmable Search JSON API, clé + CX requis. Sans clé,
-  le fournisseur est simplement ignoré.
+- **Wikipédia** — API MediaWiki publique, sans clé. Actif par défaut.
+- **Google** — Programmable Search JSON API, clé + CX requis. Désactivé
+  par défaut dans `config.py` tant que la clé n'est pas validée (voir
+  *Dépannage Google* ci-dessous). Un fournisseur qui enchaîne
+  `A3_ECHECS_FATALS_MAX` échecs 401/403 est automatiquement suspendu
+  pour le reste du run, pour ne pas rejouer une erreur de credentials
+  sur toutes les requêtes restantes.
 
 Pour chaque appel on conserve : URL appelée (clé masquée), code HTTP,
 horodatage UTC, `sha256` du corps de la réponse, et le **corps brut
 sauvegardé** dans `out/raw/`.
+
+#### Dépannage Google (403)
+
+Un 403 systématique dès le premier appel, avec une clé renseignée,
+vient presque toujours de l'un de ces trois points :
+1. la Custom Search API n'est pas activée sur le projet Google Cloud ;
+2. la clé est restreinte (HTTP referrer / IP), ce qui bloque un appel
+   serveur ;
+3. le `GOOGLE_CSE_ID` n'appartient pas au projet de la clé.
+
+Le message d'erreur exact renvoyé par Google est repris dans le log et
+dans `provenance.erreur` du résultat — il indique lequel des trois.
 
 ---
 
@@ -118,7 +146,7 @@ C'est l'objet de `python run.py verif`. Six contrôles :
 | Code | Contrôle |
 |---|---|
 | **C1** | Le chaînage des empreintes tient : A2 cite bien la version actuelle de A1, A3 celle de A2. Modifier un fichier à la main casse la chaîne. |
-| **C2** | Chaque terme de A1 est re-cherché dans le corpus scrapé. Terme introuvable = terme inventé = échec. |
+| **C2** | Chaque terme de A1 est reproductible depuis le corpus scrapé : recherche directe pour les champs copiés tels quels (`name`, `category`, bio), et **reparsing de l'URL source citée en `origine`** pour les termes reconstruits (artiste/titre_oeuvre/dimension) — une simple sous-chaîne ne suffit pas puisque A1 reformate le texte (tirets retirés, dimension recomposée). |
 | **C3** | Chaque requête de A2 est reconstruite depuis `gabarit + terme`. Non reconstructible = texte libre injecté = échec. |
 | **C4** | Chaque résultat porte un HTTP 200, et le `sha256` du fichier brut est **recalculé** et comparé. |
 | **C5** | Chaque URL/titre restitué est retrouvé **dans la réponse brute du serveur**. |
@@ -128,7 +156,8 @@ La commande sort avec le code **0** si tout est conforme, **1** sinon —
 donc utilisable telle quelle dans un contrôle automatisé.
 
 Ces contrôles ont été testés en négatif : injecter un résultat fabriqué
-fait tomber C5, altérer un fichier brut fait tomber C4.
+fait tomber C5, altérer un fichier brut fait tomber C4, injecter un
+terme absent du corpus fait tomber C2.
 
 **À savoir :** C4/C5 prouvent que le contenu vient bien d'une réponse
 serveur et qu'il n'a pas été altéré depuis. Ils ne jugent pas la
@@ -144,11 +173,16 @@ paramètres qui bougent le plus :
 
 | Paramètre | Effet |
 |---|---|
+| `A1_CHAMPS_STRUCTURES` | champs directs pris tels quels (`name`, `category` côté artistes). |
+| `A1_CHAMP_URL_CATALOGUE` | champ catalogue reparsé pour en tirer artiste/titre/dimension (`url` par défaut). |
+| `A1_REGEX_DIMENSION` | motif de détection d'une dimension dans le slug d'URL. |
 | `A1_FREQ_MIN` | seuil de fréquence du texte libre. Plus haut = moins de bruit, moins de concepts. |
 | `A1_NGRAM_MAX` | longueur max des expressions extraites (3 = « peinture à l'huile »). |
 | `A1_STOPWORDS` | mots vides. À enrichir dès que du bruit apparaît dans la sortie. |
 | `A2_TEMPLATES` | les gabarits de requêtes, par type de terme. |
 | `A2_TYPES_INCLUS` | quels types de termes déclenchent une recherche. |
+| `A3_PROVIDERS` | fournisseurs actifs, dans l'ordre. |
+| `A3_ECHECS_FATALS_MAX` | échecs 401/403 consécutifs avant suspension d'un fournisseur. |
 | `A3_MAX_RESULTATS_PAR_REQUETE` | volume ramené par requête. |
 | `A3_DELAI_ENTRE_REQUETES` | politesse réseau. Ne pas descendre trop bas sur Google. |
 
@@ -178,6 +212,8 @@ data_augmentation_projet/
 ├── .env.example
 ├── .gitignore
 ├── README.md
+├── docs/
+│   └── flow.png            ← schéma du flow (référencé en haut de ce README)
 └── data_augmentation/
     ├── config.py           ← TOUS les réglages
     ├── common.py           ← IO déterministe, hash, normalisation

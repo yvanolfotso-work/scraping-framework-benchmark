@@ -1,25 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-A1 — EXTRACTION DES MOTS-CLES CANDIDATS
-=======================================
 
-Entree  : artistes.json + catalogue.json (produits par le scraper Bartoux)
-Sortie  : out/motscles_candidats.json
 
-Garanties :
-  1. DETERMINISTE — memes fichiers d'entree + memes parametres
-     => fichier de sortie identique a l'octet pres (tri stable, hash verifie).
-  2. AUCUNE INVENTION — un terme ne peut exister en sortie que s'il a ete
-     lu dans le corpus. Chaque terme porte la liste des enregistrements
-     et des champs d'ou il provient.
-
-Deux familles de termes :
-  - STRUCTURES : valeur d'un champ identifie (nom d'artiste, categorie,
-    titre d'oeuvre, technique). Gardes meme vus une seule fois.
-  - TEXTE LIBRE : n-grammes extraits des bios et descriptions, filtres
-    par mots vides, longueur et frequence minimale.
-"""
-
+import re
 from collections import defaultdict
 
 from . import config
@@ -31,6 +13,10 @@ from .common import (
 
 log = get_logger("A1")
 
+_RE_DIMENSION = re.compile(config.A1_REGEX_DIMENSION, re.IGNORECASE)
+_RE_SCHEMA = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.\-]*://")
+_RE_EXTENSION = re.compile(r"\.(jpg|jpeg|png|webp|gif|html?)$", re.IGNORECASE)
+
 
 # ----------------------------------------------------------------------
 # Accumulateur de termes
@@ -40,7 +26,6 @@ class Accumulateur:
     """Regroupe les occurrences par cle normalisee, en gardant les variantes."""
 
     def __init__(self):
-        # cle -> {"types": {...}, "formes": {forme: n}, "occurrences": [...], "total": n}
         self.termes = defaultdict(
             lambda: {"types": defaultdict(int), "formes": defaultdict(int),
                      "occurrences": [], "total": 0}
@@ -48,6 +33,7 @@ class Accumulateur:
 
     def ajouter(self, forme: str, type_terme: str, fichier: str,
                 record_id: str, champ: str) -> None:
+        """Enregistre une occurrence brute (forme telle que lue, sans filtrage)."""
         forme = nettoyer(forme)
         if not forme:
             return
@@ -69,23 +55,22 @@ class Accumulateur:
 # ----------------------------------------------------------------------
 
 def terme_texte_valide(cle: str) -> bool:
-    """Filtre applique UNIQUEMENT aux n-grammes issus du texte libre."""
+    """Filtre applique UNIQUEMENT aux n-grammes issus de la bio (texte libre)."""
     if not cle or cle in config.A1_BLACKLIST:
         return False
     tokens = cle.split()
-    # tout n-gramme dont un token est un mot vide est rejete
     for tok in tokens:
         if tok in config.A1_STOPWORDS:
             return False
         if len(tok) < config.A1_LONGUEUR_MIN_TOKEN:
             return False
-    # rejette les suites purement numeriques (dimensions, annees isolees)
     if all(tok.isdigit() for tok in tokens):
         return False
     return True
 
 
 def terme_structure_valide(cle: str) -> bool:
+    """Filtre applique aux termes structures (name, category, parse d'URL)."""
     if not cle or cle in config.A1_BLACKLIST:
         return False
     if len(cle) < config.A1_LONGUEUR_MIN_TOKEN:
@@ -94,10 +79,64 @@ def terme_structure_valide(cle: str) -> bool:
 
 
 # ----------------------------------------------------------------------
+# Parsing de l'URL produit (catalogue)
+# ----------------------------------------------------------------------
+
+def _segments_url(url: str) -> list[str]:
+    """Decoupe une URL en segments de chemin, sans schema, domaine, query ni ancre."""
+    if not url:
+        return []
+    url = url.split("?")[0].split("#")[0]
+    url = _RE_SCHEMA.sub("", url)
+    parties = [p for p in url.split("/") if p]
+    return parties[1:] if parties else []
+
+
+def _lisible(valeur: str) -> str:
+    """Transforme un slug (tirets/underscores) en texte lisible, espaces normalises."""
+    return re.sub(r"\s+", " ", valeur.replace("-", " ").replace("_", " ")).strip()
+
+
+def parser_url_produit(url: str) -> dict:
+    """
+    Reconstruit (artiste, titre, dimension) depuis l'URL d'une fiche produit.
+    Aucune invention : chaine vide si l'information n'est pas dans l'URL.
+    """
+    segments = _segments_url(url)
+    if not segments:
+        return {"artiste": "", "titre": "", "dimension": ""}
+
+    artiste = ""
+    for i, seg in enumerate(segments[:-1]):
+        if seg.lower() in config.A1_URL_MARQUEURS_ARTISTE and i + 1 < len(segments) - 1:
+            artiste = segments[i + 1]
+            break
+
+    slug = _RE_EXTENSION.sub("", segments[-1])
+
+    dimension = ""
+    m = _RE_DIMENSION.search(slug)
+    if m:
+        dimension = f"{m.group(1)}x{m.group(2)}cm"
+        slug = slug[:m.start()] + slug[m.end():]
+
+    blocs = [b for b in slug.split("_") if b]
+    if blocs and artiste and _lisible(blocs[0]).lower() == _lisible(artiste).lower():
+        blocs = blocs[1:]
+
+    return {
+        "artiste": _lisible(artiste),
+        "titre": _lisible(" ".join(blocs)),
+        "dimension": dimension,
+    }
+
+
+# ----------------------------------------------------------------------
 # Extraction
 # ----------------------------------------------------------------------
 
 def extraire_structures(catalogues: dict, acc: Accumulateur) -> int:
+    """Collecte les champs structures declares dans config.A1_CHAMPS_STRUCTURES."""
     n = 0
     for fichier, champ, type_terme in config.A1_CHAMPS_STRUCTURES:
         catalogue = catalogues.get(fichier)
@@ -113,7 +152,36 @@ def extraire_structures(catalogues: dict, acc: Accumulateur) -> int:
     return n
 
 
+def extraire_urls_catalogue(catalogues: dict, acc: Accumulateur) -> int:
+    """Parse l'URL de chaque produit du catalogue (artiste / titre_oeuvre / dimension)."""
+    n = 0
+    catalogue = catalogues.get("catalogue")
+    if not catalogue:
+        return 0
+    champ = config.A1_CHAMP_URL_CATALOGUE
+    sans_url = 0
+    for record_id, data in iter_enregistrements(catalogue):
+        url = data.get(champ)
+        if not url:
+            sans_url += 1
+            continue
+        infos = parser_url_produit(url)
+        for cle_info, type_terme in (
+            ("artiste", "artiste"),
+            ("titre", "titre_oeuvre"),
+            ("dimension", "dimension"),
+        ):
+            if infos[cle_info]:
+                acc.ajouter(infos[cle_info], type_terme, "catalogue", record_id, champ)
+                n += 1
+    if sans_url:
+        log.info(f"Catalogue : {sans_url} enregistrements sans champ '{champ}' (ignores)")
+    log.info(f"URLs catalogue : {n} occurrences collectees")
+    return n
+
+
 def extraire_texte_libre(catalogues: dict, acc: Accumulateur) -> int:
+    """Extrait les n-grammes des champs texte libre (la bio artiste)."""
     n = 0
     for fichier, champ in config.A1_CHAMPS_TEXTE:
         catalogue = catalogues.get(fichier)
@@ -135,17 +203,7 @@ def extraire_texte_libre(catalogues: dict, acc: Accumulateur) -> int:
 
 
 def type_dominant(types: dict) -> str:
-    """
-    Type retenu pour un terme.
-
-    Regle de priorite : un terme vu au moins une fois dans un CHAMP
-    STRUCTURE est un terme structure, meme s'il apparait plus souvent
-    dans du texte libre. Sans cette regle, un titre d'oeuvre cite dans
-    une description (ex. "Montre Molle") basculait en "concept", puis
-    etait elimine par le seuil de frequence des n-grammes.
-
-    A egalite entre deux types structures : ordre alphabetique (stable).
-    """
+    """Type retenu : priorite aux types structures sur 'concept', puis ordre alpha stable."""
     structures = {t: n for t, n in types.items() if t != "concept"}
     candidats = structures or types
     return sorted(candidats.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
@@ -157,6 +215,7 @@ def forme_canonique(formes: dict) -> str:
 
 
 def construire_sortie(acc: Accumulateur) -> list[dict]:
+    """Applique les seuils par type et produit la liste finale, triee de facon stable."""
     termes = []
     for cle, e in acc.termes.items():
         t_type = type_dominant(e["types"])
@@ -187,7 +246,6 @@ def construire_sortie(acc: Accumulateur) -> list[dict]:
             },
         })
 
-    # Tri stable : type, puis frequence decroissante, puis cle
     termes.sort(key=lambda t: (t["type"], -t["frequence"], t["cle"]))
 
     if config.A1_TOP_N_PAR_TYPE:
@@ -205,6 +263,7 @@ def construire_sortie(acc: Accumulateur) -> list[dict]:
 # ----------------------------------------------------------------------
 
 def executer(limite: int | None = None) -> dict:
+    """Charge les sources, extrait, filtre, ecrit le JSON de sortie et le manifeste."""
     log.info("=" * 60)
     log.info("A1 — Extraction des mots-cles candidats")
 
@@ -217,6 +276,7 @@ def executer(limite: int | None = None) -> dict:
 
     acc = Accumulateur()
     extraire_structures(catalogues, acc)
+    extraire_urls_catalogue(catalogues, acc)
     extraire_texte_libre(catalogues, acc)
 
     termes = construire_sortie(acc)
@@ -243,16 +303,16 @@ def executer(limite: int | None = None) -> dict:
             "nb_termes": len(termes),
             "repartition_par_type": dict(sorted(repartition.items())),
             "parametres": parametres_effectifs([
-                "A1_CHAMPS_STRUCTURES", "A1_CHAMPS_TEXTE", "A1_NGRAM_MIN",
-                "A1_NGRAM_MAX", "A1_FREQ_MIN", "A1_LONGUEUR_MIN_TOKEN",
-                "A1_TOP_N_PAR_TYPE", "A1_GARDER_STRUCTURES_FREQ_1",
-                "A1_MAX_OCCURRENCES_TRACEES",
+                "A1_CHAMPS_STRUCTURES", "A1_CHAMPS_TEXTE",
+                "A1_CHAMP_URL_CATALOGUE", "A1_URL_MARQUEURS_ARTISTE",
+                "A1_REGEX_DIMENSION", "A1_NGRAM_MIN", "A1_NGRAM_MAX",
+                "A1_FREQ_MIN", "A1_LONGUEUR_MIN_TOKEN", "A1_TOP_N_PAR_TYPE",
+                "A1_GARDER_STRUCTURES_FREQ_1", "A1_MAX_OCCURRENCES_TRACEES",
             ]),
         },
         "termes": termes,
     }
 
-    # Empreinte du contenu utile (hors horodatage) : preuve de reproductibilite
     sortie["meta"]["empreinte_termes"] = sha256_objet(termes)
 
     ecrire_json(config.A1_OUT, sortie)

@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 """
 A3 — RECHERCHE EXTERNE (Wikipedia + Google)
-===========================================
 
 Entree  : out/requetes.json (produit par A2)
 Sortie  : out/resultats_bruts.json  (+ out/raw/*.json : reponses brutes)
 
 AUCUN LLM N'INTERVIENT DANS CE MODULE.
-C'est la garantie demandee : tout ce qui sort d'ici est le contenu
-renvoye par un serveur distant, jamais du texte genere.
+Tout ce qui sort d'ici est le contenu renvoye par un serveur distant,
+jamais du texte genere.
 
 Preuve d'origine conservee pour chaque appel :
-  - url_appelee   : l'URL exacte (cle d'API masquee)
-  - http_status   : le code de reponse
-  - recu_le       : horodatage UTC
-  - sha256_reponse: empreinte du corps de la reponse
-  - fichier_brut  : chemin de la reponse brute sauvegardee sur disque
+  - url_appelee    : l'URL exacte (cle d'API masquee)
+  - http_status    : le code de reponse
+  - recu_le        : horodatage UTC
+  - sha256_reponse : empreinte du corps de la reponse
+  - fichier_brut   : chemin de la reponse brute sauvegardee sur disque
 
 => N'importe qui peut rejouer l'URL, recalculer le sha256 et verifier
    que le contenu n'a pas ete fabrique.
@@ -27,7 +26,7 @@ Fournisseurs (APIs officielles, pas de scraping de pages de resultats) :
 
 import time
 import json
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 import requests
 
@@ -40,23 +39,36 @@ from .common import (
 
 log = get_logger("A3")
 
+# Codes HTTP transitoires : on reessaie. Les autres sont definitifs.
+_STATUTS_REESSAYABLES = (429, 500, 502, 503, 504)
 
-# ----------------------------------------------------------------------
-# Appel HTTP avec retries
-# ----------------------------------------------------------------------
+# Codes signalant un probleme de configuration/credential : inutile d'insister.
+_STATUTS_FATALS = (401, 403)
+
+_SESSION = requests.Session()
+_DERNIER_APPEL = 0.0
+
+
+def _attendre_cadence() -> None:
+    """Respecte A3_DELAI_ENTRE_REQUETES entre deux appels reseau reels."""
+    global _DERNIER_APPEL
+    reste = config.A3_DELAI_ENTRE_REQUETES - (time.monotonic() - _DERNIER_APPEL)
+    if reste > 0:
+        time.sleep(reste)
+    _DERNIER_APPEL = time.monotonic()
+
 
 def appel_http(url: str, params: dict, headers: dict) -> tuple[requests.Response | None, str | None]:
-    """Retourne (reponse, erreur). Reessaie avec backoff exponentiel."""
+    """Retourne (reponse, erreur). Reessaie avec backoff sur erreurs transitoires."""
     derniere_erreur = None
     for tentative in range(1, config.A3_MAX_RETRIES + 1):
+        _attendre_cadence()
         try:
-            resp = requests.get(
-                url, params=params, headers=headers,
-                timeout=config.A3_TIMEOUT,
-            )
+            resp = _SESSION.get(url, params=params, headers=headers,
+                                timeout=config.A3_TIMEOUT)
             if resp.status_code == 200:
                 return resp, None
-            if resp.status_code in (429, 500, 502, 503, 504):
+            if resp.status_code in _STATUTS_REESSAYABLES and tentative < config.A3_MAX_RETRIES:
                 derniere_erreur = f"HTTP {resp.status_code}"
                 attente = config.A3_BACKOFF ** tentative
                 log.warning(f"    {derniere_erreur} — nouvelle tentative dans {attente:.1f}s")
@@ -65,9 +77,10 @@ def appel_http(url: str, params: dict, headers: dict) -> tuple[requests.Response
             return resp, f"HTTP {resp.status_code}"
         except requests.RequestException as e:
             derniere_erreur = str(e)
-            attente = config.A3_BACKOFF ** tentative
-            log.warning(f"    Erreur reseau ({e}) — nouvelle tentative dans {attente:.1f}s")
-            time.sleep(attente)
+            if tentative < config.A3_MAX_RETRIES:
+                attente = config.A3_BACKOFF ** tentative
+                log.warning(f"    Erreur reseau ({e}) — nouvelle tentative dans {attente:.1f}s")
+                time.sleep(attente)
     return None, derniere_erreur
 
 
@@ -79,12 +92,12 @@ def url_masquee(url: str, params: dict) -> str:
 
 
 def sauver_brut(prefixe: str, requete_id: str, contenu: str) -> str | None:
+    """Ecrit la reponse brute sur disque et retourne son chemin relatif."""
     if not config.A3_SAUVER_BRUT:
         return None
     config.RAW_DIR.mkdir(parents=True, exist_ok=True)
     chemin = config.RAW_DIR / f"{prefixe}_{requete_id}.json"
-    with open(chemin, "w", encoding="utf-8") as f:
-        f.write(contenu)
+    chemin.write_text(contenu, encoding="utf-8")
     return str(chemin.relative_to(config.BASE_DIR))
 
 
@@ -93,6 +106,7 @@ def sauver_brut(prefixe: str, requete_id: str, contenu: str) -> str | None:
 # ----------------------------------------------------------------------
 
 def chercher_wikipedia(requete: dict) -> dict:
+    """Interroge l'API de recherche MediaWiki et normalise les resultats."""
     url = config.WIKIPEDIA_API.format(lang=config.A3_LANG)
     params = {
         "action": "query",
@@ -131,7 +145,6 @@ def chercher_wikipedia(requete: dict) -> dict:
         titre = nettoyer(item.get("title"))
         if not titre:
             continue
-        # Wikipedia renvoie un extrait avec des balises <span> de surlignage
         extrait = nettoyer(
             str(item.get("snippet", ""))
             .replace('<span class="searchmatch">', "")
@@ -139,7 +152,7 @@ def chercher_wikipedia(requete: dict) -> dict:
         )
         page_url = (
             f"https://{config.A3_LANG}.wikipedia.org/wiki/"
-            + titre.replace(" ", "_")
+            + quote(titre.replace(" ", "_"), safe="_(),!$-")
         )
         resultats.append({
             "position": i + 1,
@@ -156,6 +169,7 @@ def chercher_wikipedia(requete: dict) -> dict:
 # ----------------------------------------------------------------------
 
 def chercher_google_cse(requete: dict) -> dict:
+    """Interroge l'API Programmable Search et normalise les resultats."""
     if not config.GOOGLE_API_KEY or not config.GOOGLE_CSE_ID:
         return {
             "preuve": {
@@ -173,7 +187,7 @@ def chercher_google_cse(requete: dict) -> dict:
         "key": config.GOOGLE_API_KEY,
         "cx": config.GOOGLE_CSE_ID,
         "q": requete["requete"],
-        "num": min(config.A3_MAX_RESULTATS_PAR_REQUETE, 10),  # max 10 cote API
+        "num": min(config.A3_MAX_RESULTATS_PAR_REQUETE, 10),
         "hl": config.A3_LANG,
         "lr": f"lang_{config.A3_LANG}",
     }
@@ -191,6 +205,13 @@ def chercher_google_cse(requete: dict) -> dict:
     if resp is None or resp.status_code != 200:
         if resp is not None:
             preuve["corps_erreur"] = resp.text[:500]
+            # L'API renvoie la cause exacte du refus dans error.message
+            try:
+                message = json.loads(resp.text).get("error", {}).get("message")
+                if message:
+                    preuve["erreur"] = f"{preuve['erreur']} — {nettoyer(message)}"
+            except (json.JSONDecodeError, AttributeError):
+                pass
         return {"preuve": preuve, "resultats": []}
 
     corps = resp.text
@@ -224,34 +245,52 @@ FOURNISSEURS = {
 }
 
 
+def est_echec_fatal(preuve: dict) -> bool:
+    """Vrai si l'echec vient de la configuration du fournisseur, pas du reseau."""
+    return preuve.get("http_status") in _STATUTS_FATALS
+
+
 # ----------------------------------------------------------------------
 # Boucle principale
 # ----------------------------------------------------------------------
 
 def executer(limite: int | None = None, providers: list[str] | None = None) -> dict:
+    """Execute chaque requete A2 sur chaque fournisseur actif et ecrit les resultats."""
     log.info("=" * 60)
     log.info("A3 — Recherche externe (aucun LLM dans cette etape)")
 
+    if not config.A2_OUT.exists():
+        raise FileNotFoundError(
+            f"Sortie A2 introuvable : {config.A2_OUT}. Lance d'abord 'run.py a2'."
+        )
+
     a2 = lire_json(config.A2_OUT)
     requetes = a2.get("requetes", [])
+    if not requetes:
+        raise ValueError(f"Sortie A2 vide ou illisible : {config.A2_OUT}")
     log.info(f"Requetes en entree : {len(requetes)}")
 
     if limite:
         requetes = requetes[:limite]
         log.info(f"MODE TEST — limite a {len(requetes)} requetes")
 
-    actifs = providers or config.A3_PROVIDERS
+    actifs = list(providers or config.A3_PROVIDERS)
     inconnus = [p for p in actifs if p not in FOURNISSEURS]
     if inconnus:
         raise ValueError(f"Fournisseur(s) inconnu(s) : {inconnus}")
     log.info(f"Fournisseurs : {', '.join(actifs)}")
 
     enregistrements = []
-    stats = {p: {"ok": 0, "echec": 0, "resultats": 0} for p in actifs}
+    stats = {p: {"ok": 0, "echec": 0, "resultats": 0, "desactive": False} for p in actifs}
+    echecs_consecutifs = {p: 0 for p in actifs}
+    suspendus = set()
 
     for idx, requete in enumerate(requetes, 1):
         log.info(f"[{idx}/{len(requetes)}] {requete['requete']}")
         for nom in actifs:
+            if nom in suspendus:
+                continue
+
             reponse = FOURNISSEURS[nom](requete)
             preuve = reponse["preuve"]
             resultats = reponse["resultats"]
@@ -259,7 +298,18 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
             if preuve.get("erreur"):
                 stats[nom]["echec"] += 1
                 log.warning(f"    {nom:<11} : ECHEC — {preuve['erreur']}")
+                if est_echec_fatal(preuve):
+                    echecs_consecutifs[nom] += 1
+                    if echecs_consecutifs[nom] >= config.A3_ECHECS_FATALS_MAX:
+                        suspendus.add(nom)
+                        stats[nom]["desactive"] = True
+                        log.error(
+                            f"    {nom} suspendu pour ce run apres "
+                            f"{echecs_consecutifs[nom]} echecs fatals consecutifs "
+                            "(cle d'API ou restrictions a verifier)."
+                        )
             else:
+                echecs_consecutifs[nom] = 0
                 stats[nom]["ok"] += 1
                 stats[nom]["resultats"] += len(resultats)
                 log.info(f"    {nom:<11} : {len(resultats)} resultat(s)")
@@ -291,16 +341,19 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
                     },
                 })
 
-            time.sleep(config.A3_DELAI_ENTRE_REQUETES)
+        if suspendus and suspendus.issuperset(actifs):
+            log.error("Tous les fournisseurs sont suspendus — arret de la boucle.")
+            break
 
-    enregistrements.sort(key=lambda e: (e["terme"].lower(), e["fournisseur"],
+    enregistrements.sort(key=lambda e: ((e["terme"] or "").casefold(), e["fournisseur"],
                                         e["position"] or 0, e["url"] or ""))
 
     log.info("----- RESUME -----")
     for nom in actifs:
         s = stats[nom]
+        suffixe = " [SUSPENDU]" if s["desactive"] else ""
         log.info(f"  {nom:<11} : {s['ok']} appel(s) OK, {s['echec']} echec(s), "
-                 f"{s['resultats']} resultat(s)")
+                 f"{s['resultats']} resultat(s){suffixe}")
     log.info(f"  Total enregistrements : {len(enregistrements)}")
 
     sortie = {
@@ -310,13 +363,14 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
             "source": str(config.A2_OUT),
             "empreinte_requetes_a2": a2.get("meta", {}).get("empreinte_requetes"),
             "fournisseurs": actifs,
+            "fournisseurs_suspendus": sorted(suspendus),
             "statistiques": stats,
             "nb_resultats": len(enregistrements),
             "llm_utilise": False,
             "parametres": parametres_effectifs([
                 "A3_PROVIDERS", "A3_MAX_RESULTATS_PAR_REQUETE", "A3_LANG",
                 "A3_DELAI_ENTRE_REQUETES", "A3_TIMEOUT", "A3_MAX_RETRIES",
-                "A3_BACKOFF", "A3_SAUVER_BRUT",
+                "A3_BACKOFF", "A3_SAUVER_BRUT", "A3_ECHECS_FATALS_MAX",
             ]),
         },
         "resultats": enregistrements,
@@ -326,7 +380,7 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
     )
 
     ecrire_json(config.A3_OUT, sortie)
-    log.info(f"Ecrit -> {config.A3_OUT}")
+    log.info(f"Save Dans -> {config.A3_OUT}")
     if config.A3_SAUVER_BRUT:
         log.info(f"Reponses brutes -> {config.RAW_DIR}/")
 
@@ -334,6 +388,7 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
         "sortie": str(config.A3_OUT),
         "nb_resultats": len(enregistrements),
         "statistiques": stats,
+        "fournisseurs_suspendus": sorted(suspendus),
         "empreinte_resultats": sortie["meta"]["empreinte_resultats"],
     })
     return sortie
