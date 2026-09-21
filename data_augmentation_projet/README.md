@@ -19,7 +19,7 @@ artistes.json + catalogue.json          (produits par le scraper)
    A2  formulation des requêtes (déterministe) → out/requetes.json
         │
         ▼
-   A3  recherche externe Wikipédia + Google    → out/resultats_bruts.json
+   A3  recherche externe Wikipédia + Tavily    → out/resultats_bruts.json
         │                                        + out/raw/*.json (preuves)
         ▼
    VÉRIF  contrôle d'intégrité (C1 → C6)
@@ -37,8 +37,33 @@ pip install -r requirements.txt
 copy .env.example .env          # puis éditer .env
 ```
 
-Dans `.env`, `SCRAPING_DIR` doit pointer sur le dossier qui contient
-`artistes.json` et `catalogue.json`.
+Dans `.env` :
+
+| Variable | Rôle |
+|---|---|
+| `SCRAPING_DIR` | dossier qui contient `artistes.json` et `catalogue.json` |
+| `TAVILY_API_KEY` | clé API Tavily (voir ci-dessous). Inutile si tu n'utilises que Wikipédia. |
+
+Exemple :
+
+```
+SCRAPING_DIR=C:\chemin\vers\le\scraper\out
+TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxx
+```
+
+Le fichier `.env` ne doit jamais être commité (il est dans `.gitignore`).
+Seul `.env.example` (avec des valeurs vides) est versionné.
+
+### Obtenir la clé Tavily
+
+1. Créer un compte sur [tavily.com](https://tavily.com) (email ou compte Google/GitHub).
+2. Ouvrir le tableau de bord : la clé API y est affichée, elle commence par `tvly-`.
+3. La copier dans `.env` sur la ligne `TAVILY_API_KEY=`.
+
+Le plan gratuit donne **1 000 crédits par mois, sans carte bancaire**, et se
+renouvelle chaque mois. Une recherche simple coûte 1 crédit : un run complet
+de 171 requêtes en consomme 171, soit environ 5 runs complets par mois.
+Sans carte enregistrée, aucune facturation accidentelle n'est possible.
 
 ---
 
@@ -54,7 +79,10 @@ python run.py a2
 # 3. TEST RÉEL sur 3 requêtes, Wikipédia seulement (pas de clé nécessaire)
 python run.py a3 --limite 3 --providers wikipedia
 
-# 4. Contrôler que rien n'a été inventé
+# 4. TEST RÉEL sur 3 requêtes, Tavily seulement (3 crédits consommés)
+python run.py a3 --limite 3 --providers tavily
+
+# 5. Contrôler que rien n'a été inventé
 python run.py verif
 
 # Tout d'un coup, en mode test
@@ -64,9 +92,9 @@ python run.py all --limite 5
 python run.py a1 --verifier-determinisme
 ```
 
-Commence toujours par `--limite` et `--providers wikipedia` : Wikipédia
-ne demande aucune clé, donc tu peux valider le flow de bout en bout avant
-de configurer Google.
+Commence toujours par `--limite` : Wikipédia ne demande aucune clé, donc tu
+peux valider le flow de bout en bout avant de passer à Tavily, et un test
+Tavily sur 3 requêtes ne coûte que 3 crédits sur les 1 000 du mois.
 
 ---
 
@@ -113,29 +141,36 @@ la même requête pour tous les termes).
 **Aucun LLM non plus.** Deux fournisseurs, tous deux via API officielle
 (pas de scraping des pages de résultats) :
 
-- **Wikipédia** — API MediaWiki publique, sans clé. Actif par défaut.
-- **Google** — Programmable Search JSON API, clé + CX requis. Désactivé
-  par défaut dans `config.py` tant que la clé n'est pas validée (voir
-  *Dépannage Google* ci-dessous). Un fournisseur qui enchaîne
-  `A3_ECHECS_FATALS_MAX` échecs 401/403 est automatiquement suspendu
-  pour le reste du run, pour ne pas rejouer une erreur de credentials
-  sur toutes les requêtes restantes.
+- **Wikipédia** — API MediaWiki publique, sans clé. Requêtes en GET.
+- **Tavily** — API de recherche web (`POST https://api.tavily.com/search`),
+  clé `TAVILY_API_KEY` requise. Il cherche sur tout le web : aucune liste de
+  sites à déclarer. La clé est envoyée dans l'en-tête `Authorization` et
+  n'est jamais écrite dans les fichiers de sortie.
 
-Pour chaque appel on conserve : URL appelée (clé masquée), code HTTP,
-horodatage UTC, `sha256` du corps de la réponse, et le **corps brut
-sauvegardé** dans `out/raw/`.
+Point important côté Tavily : l'option de **réponse générée par IA est
+désactivée** (`include_answer` à `false`). On ne garde que les résultats
+bruts (titre, URL, extrait) renvoyés par le serveur, pour respecter la règle
+« aucun LLM dans A3 ».
 
-#### Dépannage Google (403)
+Un fournisseur qui enchaîne `A3_ECHECS_FATALS_MAX` échecs 401/403 est
+automatiquement suspendu pour le reste du run, pour ne pas rejouer une
+erreur de credentials sur toutes les requêtes restantes.
 
-Un 403 systématique dès le premier appel, avec une clé renseignée,
-vient presque toujours de l'un de ces trois points :
-1. la Custom Search API n'est pas activée sur le projet Google Cloud ;
-2. la clé est restreinte (HTTP referrer / IP), ce qui bloque un appel
-   serveur ;
-3. le `GOOGLE_CSE_ID` n'appartient pas au projet de la clé.
+Pour chaque appel on conserve : URL appelée, **paramètres de la requête**
+(indispensables pour Tavily, qui est en POST : l'URL seule ne dit pas ce qui
+a été demandé), code HTTP, horodatage UTC, `sha256` du corps de la réponse,
+et le **corps brut sauvegardé** dans `out/raw/`.
 
-Le message d'erreur exact renvoyé par Google est repris dans le log et
-dans `provenance.erreur` du résultat — il indique lequel des trois.
+#### Dépannage Tavily
+
+| Symptôme | Cause probable |
+|---|---|
+| `401` dès le premier appel | `TAVILY_API_KEY` absente, mal copiée, ou `.env` non lu (vérifier qu'il est bien à la racine du projet, sans espaces autour du `=`). |
+| `429` | trop de requêtes trop vite : augmenter `A3_DELAI_ENTRE_REQUETES`. |
+| erreur de quota / plan | les 1 000 crédits du mois sont épuisés : attendre le renouvellement mensuel, ou relancer avec `--limite`. |
+
+Le message d'erreur exact renvoyé par le serveur est repris dans le log et
+dans `provenance.erreur` du résultat.
 
 ---
 
@@ -181,10 +216,10 @@ paramètres qui bougent le plus :
 | `A1_STOPWORDS` | mots vides. À enrichir dès que du bruit apparaît dans la sortie. |
 | `A2_TEMPLATES` | les gabarits de requêtes, par type de terme. |
 | `A2_TYPES_INCLUS` | quels types de termes déclenchent une recherche. |
-| `A3_PROVIDERS` | fournisseurs actifs, dans l'ordre. |
+| `A3_PROVIDERS` | fournisseurs actifs, dans l'ordre (`wikipedia`, `tavily`). |
 | `A3_ECHECS_FATALS_MAX` | échecs 401/403 consécutifs avant suspension d'un fournisseur. |
 | `A3_MAX_RESULTATS_PAR_REQUETE` | volume ramené par requête. |
-| `A3_DELAI_ENTRE_REQUETES` | politesse réseau. Ne pas descendre trop bas sur Google. |
+| `A3_DELAI_ENTRE_REQUETES` | politesse réseau. Ne pas descendre trop bas. |
 
 Les paramètres effectifs de chaque run sont recopiés dans le `meta` du
 fichier de sortie et dans `out/manifest.json` : on sait toujours avec
@@ -209,7 +244,7 @@ Volontairement, d'après le cadrage actuel :
 data_augmentation_projet/
 ├── run.py                  ← point d'entrée CLI
 ├── requirements.txt
-├── .env.example
+├── .env.example            ← SCRAPING_DIR, TAVILY_API_KEY (valeurs vides)
 ├── .gitignore
 ├── README.md
 ├── docs/

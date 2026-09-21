@@ -76,7 +76,7 @@ def main():
     )
     parseur.add_argument(
         "--providers", nargs="+", default=None,
-        choices=["wikipedia", "google_cse"],
+        choices=["wikipedia", "tavily", "google_cse"],
         help="fournisseurs de recherche pour a3 (defaut : config.A3_PROVIDERS)",
     )
     parseur.add_argument(

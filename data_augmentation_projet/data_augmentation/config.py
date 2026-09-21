@@ -12,6 +12,15 @@ de l'environnement / du fichier .env (voir .env.example).
 import os
 from pathlib import Path
 
+# Charge le fichier .env situe a la racine du projet
+# (data_augmentation_projet/.env, a cote de run.py).
+# Sans effet si python-dotenv n'est pas installe ou si le .env n'existe pas.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
+
 # ----------------------------------------------------------------------
 # CHEMINS
 # ----------------------------------------------------------------------
@@ -150,8 +159,9 @@ A2_TYPES_INCLUS = {"artiste", "categorie", "technique", "concept"}
 # A3 — RECHERCHE EXTERNE
 # ----------------------------------------------------------------------
 
-# A3_PROVIDERS = ["wikipedia", "google_cse"]
-A3_PROVIDERS = ["wikipedia"]
+# Fournisseurs actifs : "wikipedia", "tavily", "google_cse".
+# google_cse est ferme pour ton projet Google (erreur 403) : ne pas l'activer.
+A3_PROVIDERS = ["wikipedia", "tavily"]
 A3_ECHECS_FATALS_MAX = 3
 A3_MAX_RESULTATS_PAR_REQUETE = 5
 A3_LANG = "fr"
@@ -164,6 +174,15 @@ A3_SAUVER_BRUT = True
 WIKIPEDIA_API = "https://{lang}.wikipedia.org/w/api.php"
 WIKIPEDIA_UA = "AugmentationCorpus/1.0 (recherche interne; contact@exemple.com)"
 
+# --- Tavily (recherche web, plan gratuit sans carte : 1000 credits/mois) ---
+TAVILY_ENDPOINT = "https://api.tavily.com/search"
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
+# "basic" = 1 credit par recherche ; "advanced" = 2 credits (a eviter en gratuit).
+TAVILY_SEARCH_DEPTH = "basic"
+# Domaines a ne jamais renvoyer (ex: ["pinterest.com", "facebook.com"]). Vide = aucun.
+TAVILY_EXCLURE_DOMAINES = []
+
+# --- Google CSE (conserve, desactive : API fermee pour ce projet) ---
 GOOGLE_CSE_ENDPOINT = "https://www.googleapis.com/customsearch/v1"
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 GOOGLE_CSE_ID = os.getenv("GOOGLE_CSE_ID", "")

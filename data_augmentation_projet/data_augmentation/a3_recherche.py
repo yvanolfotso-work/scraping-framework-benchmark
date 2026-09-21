@@ -1,32 +1,38 @@
 # -*- coding: utf-8 -*-
 """
-A3 — RECHERCHE EXTERNE (Wikipedia + Google)
+A3 — RECHERCHE EXTERNE (Wikipedia + Tavily)
 
 Entree  : out/requetes.json (produit par A2)
 Sortie  : out/resultats_bruts.json  (+ out/raw/*.json : reponses brutes)
 
 AUCUN LLM N'INTERVIENT DANS CE MODULE.
 Tout ce qui sort d'ici est le contenu renvoye par un serveur distant,
-jamais du texte genere.
+jamais du texte genere par nous. Pour Tavily, la reponse "synthetisee"
+(include_answer) est explicitement desactivee : on ne garde que les
+resultats (titre, url, extrait de la page).
 
 Preuve d'origine conservee pour chaque appel :
-  - url_appelee    : l'URL exacte (cle d'API masquee)
+  - url_appelee    : l'URL exacte (cle d'API jamais dans l'URL)
+  - methode / corps_requete : pour les appels POST (Tavily), le corps
+                     JSON envoye (il ne contient jamais de cle d'API)
   - http_status    : le code de reponse
   - recu_le        : horodatage UTC
   - sha256_reponse : empreinte du corps de la reponse
   - fichier_brut   : chemin de la reponse brute sauvegardee sur disque
 
-=> N'importe qui peut rejouer l'URL, recalculer le sha256 et verifier
-   que le contenu n'a pas ete fabrique.
+=> N'importe qui peut rejouer l'appel (URL, ou URL + corps pour un POST),
+   recalculer le sha256 et verifier que le contenu n'a pas ete fabrique.
 
-Fournisseurs (APIs officielles, pas de scraping de pages de resultats) :
+Fournisseurs :
   - wikipedia  : API MediaWiki publique, sans cle
-  - google_cse : Google Programmable Search JSON API (cle + CX requis)
+  - tavily     : API Tavily Search (cle requise, TAVILY_API_KEY dans .env)
+  - google_cse : Google Programmable Search (conserve mais ferme pour ce
+                 projet : erreur 403, ne pas l'activer)
 """
 
 import time
 import json
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode, quote, urlparse
 
 import requests
 
@@ -42,8 +48,9 @@ log = get_logger("A3")
 # Codes HTTP transitoires : on reessaie. Les autres sont definitifs.
 _STATUTS_REESSAYABLES = (429, 500, 502, 503, 504)
 
-# Codes signalant un probleme de configuration/credential : inutile d'insister.
-_STATUTS_FATALS = (401, 403)
+# Codes signalant un probleme de configuration/credential/quota : inutile
+# d'insister (401/403 : cle refusee ; 432/433 : quota Tavily epuise).
+_STATUTS_FATALS = (401, 403, 432, 433)
 
 _SESSION = requests.Session()
 _DERNIER_APPEL = 0.0
@@ -58,14 +65,22 @@ def _attendre_cadence() -> None:
     _DERNIER_APPEL = time.monotonic()
 
 
-def appel_http(url: str, params: dict, headers: dict) -> tuple[requests.Response | None, str | None]:
-    """Retourne (reponse, erreur). Reessaie avec backoff sur erreurs transitoires."""
+def appel_http(url: str, params: dict, headers: dict,
+               json_corps: dict | None = None) -> tuple[requests.Response | None, str | None]:
+    """Retourne (reponse, erreur). Reessaie avec backoff sur erreurs transitoires.
+
+    GET par defaut ; POST avec un corps JSON si json_corps est fourni.
+    """
     derniere_erreur = None
     for tentative in range(1, config.A3_MAX_RETRIES + 1):
         _attendre_cadence()
         try:
-            resp = _SESSION.get(url, params=params, headers=headers,
-                                timeout=config.A3_TIMEOUT)
+            if json_corps is None:
+                resp = _SESSION.get(url, params=params, headers=headers,
+                                    timeout=config.A3_TIMEOUT)
+            else:
+                resp = _SESSION.post(url, params=params, json=json_corps,
+                                     headers=headers, timeout=config.A3_TIMEOUT)
             if resp.status_code == 200:
                 return resp, None
             if resp.status_code in _STATUTS_REESSAYABLES and tentative < config.A3_MAX_RETRIES:
@@ -165,7 +180,94 @@ def chercher_wikipedia(requete: dict) -> dict:
 
 
 # ----------------------------------------------------------------------
-# Fournisseur : Google Programmable Search (API officielle)
+# Fournisseur : Tavily (API de recherche web, POST + cle dans l'en-tete)
+# ----------------------------------------------------------------------
+
+def chercher_tavily(requete: dict) -> dict:
+    """Interroge l'API Tavily Search et normalise les resultats."""
+    if not config.TAVILY_API_KEY:
+        return {
+            "preuve": {
+                "fournisseur": "tavily",
+                "erreur": "TAVILY_API_KEY absente (voir .env) — fournisseur ignore",
+                "recu_le": now_iso(),
+                "http_status": None,
+            },
+            "resultats": [],
+        }
+
+    url = config.TAVILY_ENDPOINT
+    corps_requete = {
+        "query": requete["requete"],
+        "search_depth": config.TAVILY_SEARCH_DEPTH,
+        "max_results": min(config.A3_MAX_RESULTATS_PAR_REQUETE, 20),
+        "include_answer": False,        # jamais de reponse synthetisee
+        "include_raw_content": False,
+        "include_images": False,
+    }
+    if config.TAVILY_EXCLURE_DOMAINES:
+        corps_requete["exclude_domains"] = list(config.TAVILY_EXCLURE_DOMAINES)
+
+    # La cle est dans l'en-tete Authorization : elle n'apparait jamais
+    # dans l'URL, ni dans corps_requete, ni dans les fichiers de preuve.
+    headers = {
+        "Authorization": f"Bearer {config.TAVILY_API_KEY}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    resp, erreur = appel_http(url, {}, headers, json_corps=corps_requete)
+    preuve = {
+        "fournisseur": "tavily",
+        "methode": "POST",
+        "url_appelee": url,
+        "corps_requete": corps_requete,
+        "recu_le": now_iso(),
+        "http_status": resp.status_code if resp is not None else None,
+        "erreur": erreur,
+    }
+
+    if resp is None or resp.status_code != 200:
+        if resp is not None:
+            preuve["corps_erreur"] = resp.text[:500]
+            # Tavily renvoie la cause dans detail (texte) ou detail.error
+            try:
+                detail = json.loads(resp.text).get("detail")
+                if isinstance(detail, dict):
+                    detail = detail.get("error")
+                if detail:
+                    preuve["erreur"] = f"{preuve['erreur']} — {nettoyer(str(detail))}"
+            except (json.JSONDecodeError, AttributeError):
+                pass
+        return {"preuve": preuve, "resultats": []}
+
+    corps = resp.text
+    preuve["sha256_reponse"] = sha256_texte(corps)
+    preuve["fichier_brut"] = sauver_brut("tavily", requete["id"], corps)
+
+    try:
+        data = json.loads(corps)
+    except json.JSONDecodeError as e:
+        preuve["erreur"] = f"JSON invalide : {e}"
+        return {"preuve": preuve, "resultats": []}
+
+    resultats = []
+    for i, item in enumerate(data.get("results") or []):
+        lien = nettoyer(item.get("url"))
+        if not lien:
+            continue
+        resultats.append({
+            "position": i + 1,
+            "titre": nettoyer(item.get("title")),
+            "url": lien,
+            "extrait": nettoyer(item.get("content")),
+            "site": nettoyer(urlparse(lien).netloc),
+        })
+    return {"preuve": preuve, "resultats": resultats}
+
+
+# ----------------------------------------------------------------------
+# Fournisseur : Google Programmable Search (conserve, ferme pour ce projet)
 # ----------------------------------------------------------------------
 
 def chercher_google_cse(requete: dict) -> dict:
@@ -241,6 +343,7 @@ def chercher_google_cse(requete: dict) -> dict:
 
 FOURNISSEURS = {
     "wikipedia": chercher_wikipedia,
+    "tavily": chercher_tavily,
     "google_cse": chercher_google_cse,
 }
 
@@ -306,7 +409,7 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
                         log.error(
                             f"    {nom} suspendu pour ce run apres "
                             f"{echecs_consecutifs[nom]} echecs fatals consecutifs "
-                            "(cle d'API ou restrictions a verifier)."
+                            "(cle d'API, restrictions ou quota a verifier)."
                         )
             else:
                 echecs_consecutifs[nom] = 0
@@ -315,6 +418,19 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
                 log.info(f"    {nom:<11} : {len(resultats)} resultat(s)")
 
             for r in resultats:
+                provenance = {
+                    "origine": "web",
+                    "url_appelee": preuve.get("url_appelee"),
+                    "http_status": preuve.get("http_status"),
+                    "recu_le": preuve.get("recu_le"),
+                    "sha256_reponse": preuve.get("sha256_reponse"),
+                    "fichier_brut": preuve.get("fichier_brut"),
+                }
+                # Appels POST (Tavily) : on garde de quoi rejouer l'appel.
+                if preuve.get("corps_requete") is not None:
+                    provenance["methode"] = preuve.get("methode")
+                    provenance["corps_requete"] = preuve.get("corps_requete")
+
                 enregistrements.append({
                     "id": id_stable(nom, requete["id"], r["url"]),
                     # --- liaison remontante vers le corpus scrape ---
@@ -331,14 +447,7 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
                     "url": r.get("url"),
                     "extrait": r.get("extrait"),
                     # --- preuve d'origine ---
-                    "provenance": {
-                        "origine": "web",
-                        "url_appelee": preuve.get("url_appelee"),
-                        "http_status": preuve.get("http_status"),
-                        "recu_le": preuve.get("recu_le"),
-                        "sha256_reponse": preuve.get("sha256_reponse"),
-                        "fichier_brut": preuve.get("fichier_brut"),
-                    },
+                    "provenance": provenance,
                 })
 
         if suspendus and suspendus.issuperset(actifs):
@@ -371,6 +480,7 @@ def executer(limite: int | None = None, providers: list[str] | None = None) -> d
                 "A3_PROVIDERS", "A3_MAX_RESULTATS_PAR_REQUETE", "A3_LANG",
                 "A3_DELAI_ENTRE_REQUETES", "A3_TIMEOUT", "A3_MAX_RETRIES",
                 "A3_BACKOFF", "A3_SAUVER_BRUT", "A3_ECHECS_FATALS_MAX",
+                "TAVILY_SEARCH_DEPTH",
             ]),
         },
         "resultats": enregistrements,
