@@ -135,6 +135,17 @@ def parser_url_produit(url: str) -> dict:
 # Extraction
 # ----------------------------------------------------------------------
 
+def _iter_records(catalogue: dict):
+    """Itere (record_id, champs) : artistes.json est a plat, catalogue.json range
+    ses champs sous 'data'. Ordre trie pour rester deterministe."""
+    for record_id in sorted(catalogue):
+        rec = catalogue[record_id]
+        if not isinstance(rec, dict):
+            continue
+        data = rec.get("data")
+        yield record_id, (data if isinstance(data, dict) else rec)
+
+
 def extraire_structures(catalogues: dict, acc: Accumulateur) -> int:
     """Collecte les champs structures declares dans config.A1_CHAMPS_STRUCTURES."""
     n = 0
@@ -142,7 +153,7 @@ def extraire_structures(catalogues: dict, acc: Accumulateur) -> int:
         catalogue = catalogues.get(fichier)
         if not catalogue:
             continue
-        for record_id, data in iter_enregistrements(catalogue):
+        for record_id, data in _iter_records(catalogue):
             valeur = data.get(champ)
             if not valeur:
                 continue
@@ -153,7 +164,11 @@ def extraire_structures(catalogues: dict, acc: Accumulateur) -> int:
 
 
 def extraire_urls_catalogue(catalogues: dict, acc: Accumulateur) -> int:
-    """Parse l'URL de chaque produit du catalogue (artiste / titre_oeuvre / dimension)."""
+    """Parse l'URL de chaque produit du catalogue (titre_oeuvre / dimension).
+
+    L'artiste n'est volontairement pas pris depuis l'URL : le dossier peut etre
+    un identifiant numerique. Les artistes viennent de artistes.json (champ 'name').
+    """
     n = 0
     catalogue = catalogues.get("catalogue")
     if not catalogue:
@@ -167,7 +182,6 @@ def extraire_urls_catalogue(catalogues: dict, acc: Accumulateur) -> int:
             continue
         infos = parser_url_produit(url)
         for cle_info, type_terme in (
-            ("artiste", "artiste"),
             ("titre", "titre_oeuvre"),
             ("dimension", "dimension"),
         ):
@@ -187,7 +201,7 @@ def extraire_texte_libre(catalogues: dict, acc: Accumulateur) -> int:
         catalogue = catalogues.get(fichier)
         if not catalogue:
             continue
-        for record_id, data in iter_enregistrements(catalogue):
+        for record_id, data in _iter_records(catalogue):
             texte = data.get(champ)
             if not texte:
                 continue
@@ -316,7 +330,7 @@ def executer(limite: int | None = None) -> dict:
     sortie["meta"]["empreinte_termes"] = sha256_objet(termes)
 
     ecrire_json(config.A1_OUT, sortie)
-    log.info(f"Ecrit -> {config.A1_OUT}")
+    log.info(f"Save Dans -> {config.A1_OUT}")
     log.info(f"Empreinte termes : {sortie['meta']['empreinte_termes']}")
 
     enregistrer_manifeste("A1", {
