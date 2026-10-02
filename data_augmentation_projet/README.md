@@ -42,7 +42,7 @@ Dans `.env` :
 | Variable | Rôle |
 |---|---|
 | `SCRAPING_DIR` | dossier qui contient `artistes.json` et `catalogue.json` |
-| `TAVILY_API_KEY` | clé API Tavily (voir ci-dessous). Inutile si tu n'utilises que Wikipédia. |
+| `TAVILY_API_KEY` | clé API Tavily (voir ci-dessous). |
 
 Exemple :
 
