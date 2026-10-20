@@ -333,7 +333,11 @@ def analyse_one(task: dict, client, model: str, attempts: int, base_timeout: flo
             raise FatalError(f"{type(e).__name__}: {e}") from e
 
         except anthropic.BadRequestError as e:
-            res["error"] = f"BadRequest (non retentable) : {e}"
+            msg = str(e)
+            if "credit balance" in msg.lower():
+                raise FatalError(f"Credit Anthropic insuffisant : {msg}") from e
+            res["error"] = f"BadRequest (non retentable) : {msg}"
+            log.error(f"    BadRequest '{task['title']}' : {msg[:500]}")
             return res
 
         except (anthropic.RateLimitError, anthropic.APITimeoutError,
@@ -450,8 +454,16 @@ def run(limit: int | None, force: bool, workers: int, model: str) -> None:
         try:
             futures = {pool.submit(analyse_one, t, client, model, attempts, base_timeout): t
                        for t in batch}
+            bad_streak = 0
             for fut in as_completed(futures):
                 res = fut.result()           # FatalError remonte ici
+                if res["status"] == "ok":
+                    bad_streak = 0
+                elif (res["error"] or "").startswith("BadRequest"):
+                    bad_streak += 1
+                    if bad_streak >= 5:
+                        raise FatalError("5 erreurs 400 consecutives : requete refusee par l'API "
+                                         f"(derniere : {res['error'][:300]})")
                 if not apply(res):
                     if res["status"] == "missing":
                         stats["missing"] += 1
