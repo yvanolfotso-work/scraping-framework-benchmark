@@ -147,7 +147,7 @@ Champs :
 - recognizable_elements : 0 a 10 elements concrets et clairement identifiables dans
   l'oeuvre (ex : ours, bateau, guitare, tour eiffel, samourai, voiture). Noms au singulier.
   Liste vide si rien n'est clairement identifiable (oeuvre abstraite).
-Reponds UNIQUEMENT via l'outil record_artwork_metadata."""
+Tu DOIS repondre en appelant l'outil record_artwork_metadata, une seule fois, sans aucun texte avant ou apres."""
 
 TOOL = {
     "name": "record_artwork_metadata",
@@ -295,7 +295,7 @@ def call_model(client, model: str, context: str, image_b64: str,
         max_tokens=MAX_TOKENS,
         system=SYSTEM_PROMPT,
         tools=[TOOL],
-        tool_choice={"type": "tool", "name": TOOL["name"]},
+        tool_choice={"type": "auto"},
         messages=[{
             "role": "user",
             "content": [
