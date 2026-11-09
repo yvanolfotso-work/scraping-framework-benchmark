@@ -16,3 +16,6 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+
+Scrapling_demos_clients/output_manquantes/
+Scrapling_demos_clients/output_manquantes_final/
